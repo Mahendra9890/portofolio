@@ -72,7 +72,7 @@ export function PortfolioPage({ locale }: { locale: Locale }) {
     <div className="min-h-screen bg-[var(--bg)] text-[var(--text)]">
       <header className="sticky top-0 z-50 border-b border-[var(--border)] bg-[rgba(10,10,11,0.72)] backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
-          <Link href={`/${locale}`} className="flex items-center gap-3 text-sm font-semibold tracking-[0.2em] text-[var(--text)] uppercase">
+          <Link href="#home" aria-label={locale === "id" ? "Kembali ke atas" : "Back to top"} className="flex items-center gap-3 text-sm font-semibold tracking-[0.2em] text-[var(--text)] uppercase">
             <span className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface)] text-xs tracking-[0.18em] text-[var(--accent)] transition-transform hover:scale-105">
               {portfolioData.profile.monogram}
             </span>
