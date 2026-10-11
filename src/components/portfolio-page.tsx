@@ -80,6 +80,22 @@ function getText(value: { id: string; en: string }, locale: Locale) {
   return locale === "en" ? value.en : value.id;
 }
 
+function SectionMark({
+  label,
+  locale,
+  className = "",
+}: {
+  label: { id: string; en: string };
+  locale: Locale;
+  className?: string;
+}) {
+  return (
+    <div className={`section-mark ${className}`.trim()}>
+      <span className="section-mark-title">{getText(label, locale)}</span>
+    </div>
+  );
+}
+
 const projectCategoryOrder = ["Web App", "Web", "AI/Research", "Mobile App / UX Research", "Robotics"] as const;
 
 export function PortfolioPage({ locale }: { locale: Locale }) {
@@ -189,16 +205,13 @@ export function PortfolioPage({ locale }: { locale: Locale }) {
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_var(--accent-glow),_transparent_42%)]" />
           <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr]">
             <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="relative z-10">
-              <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--surface)] px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.18em] text-[var(--text-muted)]">
-                <span className="h-2 w-2 rounded-full bg-[var(--accent-2)] shadow-[0_0_12px_var(--accent-2)]" />
-                {portfolioData.profile.status[locale]}
-              </div>
-
-              <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--text-muted)]">
-                {"// Software Engineer & Frontend Developer"}
+              <p className="mb-4 text-sm text-[var(--text-muted)]">
+                <span className="text-[var(--accent)]">{portfolioData.profile.status[locale]}</span>
+                <span className="mx-2 text-[var(--border)]">·</span>
+                Software Engineer & Frontend Developer
               </p>
 
-              <h1 className="max-w-xl text-5xl font-semibold tracking-[-0.06em] text-[var(--text)] sm:text-6xl lg:text-[7rem]">
+              <h1 className="font-display max-w-xl text-5xl font-normal tracking-[-0.04em] text-[var(--text)] sm:text-6xl lg:text-[6.5rem]">
                 Prabu Mahendra
               </h1>
 
@@ -237,18 +250,13 @@ export function PortfolioPage({ locale }: { locale: Locale }) {
                 </a>
               </div>
 
-              <div className="mt-8 flex flex-wrap items-center gap-3 text-[var(--text-muted)]">
-                {['HTML', 'CSS', 'JavaScript', 'SQL', 'C++', 'Python', 'Figma', 'Git'].map((tool) => (
-                  <span key={tool} className="rounded-full border border-[var(--border)] px-2.5 py-1 text-[10px] uppercase tracking-[0.18em]">
-                    {tool}
-                  </span>
-                ))}
-              </div>
-
               <div className="mt-8 flex flex-wrap gap-6 text-sm text-[var(--text-muted)]">
                 <span className="inline-flex items-center gap-2"><MapPin size={14} /> Ubud, Bali · WITA</span>
                 <span className="inline-flex items-center gap-2"><Briefcase size={14} /> BINUS University · B28</span>
               </div>
+              <p className="mt-4 max-w-lg text-sm leading-6 text-[var(--text-muted)]">
+                HTML · CSS · JavaScript · SQL · C++ · Python · Figma · Git
+              </p>
             </motion.div>
 
             <motion.div initial={{ opacity: 0, scale: 0.94 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.7, delay: 0.1 }} className="relative mx-auto w-full max-w-[450px]">
@@ -279,11 +287,7 @@ export function PortfolioPage({ locale }: { locale: Locale }) {
         </section>
 
         <section id="about" className="py-20">
-          <div className="mb-10 flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--text-muted)]">
-            <span className="text-[var(--accent)]">{"// about"}</span>
-            <span className="inline-block h-px w-14 bg-[var(--border)]" />
-            <span>01</span>
-          </div>
+          <SectionMark locale={locale} label={{ id: "Tentang", en: "About" }} />
 
           <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
             <div className="relative">
@@ -363,13 +367,9 @@ export function PortfolioPage({ locale }: { locale: Locale }) {
         </section>
 
         <section id="projects" className="py-20">
-          <div className="mb-10 flex items-center justify-between gap-4">
-            <div className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--text-muted)]">
-              <span className="text-[var(--accent)]">{"// projects"}</span>
-              <span className="inline-block h-px w-14 bg-[var(--border)]" />
-              <span>02</span>
-            </div>
-            <div className="text-[10px] uppercase tracking-[0.2em] text-[var(--text-muted)]">{locale === "id" ? "Proyek pilihan" : "Selected work"}</div>
+          <div className="mb-10 flex flex-wrap items-baseline justify-between gap-4">
+            <SectionMark className="!mb-0" locale={locale} label={{ id: "Proyek", en: "Projects" }} />
+            <p className="text-sm text-[var(--text-muted)]">{locale === "id" ? "Proyek pilihan" : "Selected work"}</p>
           </div>
 
           <div aria-label={locale === "id" ? "Filter kategori proyek" : "Project category filter"} className="mb-6 flex flex-wrap gap-2">
@@ -428,11 +428,7 @@ export function PortfolioPage({ locale }: { locale: Locale }) {
         </section>
 
         <section id="skills" className="py-20">
-          <div className="mb-10 flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--text-muted)]">
-            <span className="text-[var(--accent)]">{"// skills"}</span>
-            <span className="inline-block h-px w-14 bg-[var(--border)]" />
-            <span>03</span>
-          </div>
+          <SectionMark locale={locale} label={{ id: "Keahlian", en: "Skills" }} />
           <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
             <div className="rounded-[2rem] border border-[var(--border)] bg-[var(--surface)] p-6">
               <h3 className="text-lg font-semibold">Core Languages</h3>
@@ -480,17 +476,13 @@ export function PortfolioPage({ locale }: { locale: Locale }) {
         </section>
 
         <section id="experience" className="py-20">
-          <div className="mb-10 flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--text-muted)]">
-            <span className="text-[var(--accent)]">{"// experience"}</span>
-            <span className="inline-block h-px w-14 bg-[var(--border)]" />
-            <span>04</span>
-          </div>
+          <SectionMark locale={locale} label={{ id: "Pengalaman", en: "Experience" }} />
 
           <div className="space-y-6">
             {portfolioData.experiences.map((experience) => (
               <div key={`${experience.organization}-${experience.period}`} className="relative rounded-[2rem] border border-[var(--border)] bg-[var(--surface)] p-6 pl-7">
                 <div className="absolute left-5 top-7 h-[calc(100%-2rem)] w-px bg-[var(--border)]" />
-                <div className="absolute left-[1.05rem] top-7 h-3 w-3 rounded-full bg-[var(--accent)] shadow-[0_0_18px_var(--accent)]" />
+                <div className="absolute left-[1.05rem] top-7 h-3 w-3 rounded-full bg-[var(--accent)]" />
                 <div className="ml-2">
                   <div className="text-[10px] uppercase tracking-[0.2em] text-[var(--text-muted)]">{experience.period}</div>
                   <h3 className="mt-2 text-2xl font-semibold tracking-[-0.04em]">{getText(experience.role, locale)}</h3>
@@ -513,11 +505,7 @@ export function PortfolioPage({ locale }: { locale: Locale }) {
         </section>
 
         <section id="awards" className="py-20">
-          <div className="mb-10 flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--text-muted)]">
-            <span className="text-[var(--accent)]">{"// awards"}</span>
-            <span className="inline-block h-px w-14 bg-[var(--border)]" />
-            <span>05</span>
-          </div>
+          <SectionMark locale={locale} label={{ id: "Penghargaan", en: "Awards" }} />
 
           <div className="grid gap-5 md:grid-cols-2">
             {portfolioData.awards.map((award) => (
@@ -566,11 +554,7 @@ export function PortfolioPage({ locale }: { locale: Locale }) {
         </section>
 
         <section className="py-20">
-          <div className="mb-10 flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--text-muted)]">
-            <span className="text-[var(--accent)]">{"// research"}</span>
-            <span className="inline-block h-px w-14 bg-[var(--border)]" />
-            <span>06</span>
-          </div>
+          <SectionMark locale={locale} label={{ id: "Penelitian", en: "Research" }} />
           <div className="rounded-[2rem] border border-[var(--border)] bg-[var(--surface)] p-6 md:p-8">
             <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
               <div>
@@ -600,11 +584,7 @@ export function PortfolioPage({ locale }: { locale: Locale }) {
         </section>
 
         <section className="py-20">
-          <div className="mb-10 flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--text-muted)]">
-            <span className="text-[var(--accent)]">{"// beyond code"}</span>
-            <span className="inline-block h-px w-14 bg-[var(--border)]" />
-            <span>07</span>
-          </div>
+          <SectionMark locale={locale} label={{ id: "Di luar kode", en: "Beyond code" }} />
           <div className="grid gap-5 lg:grid-cols-2">
             {portfolioData.ventures.map((venture) => (
               <div key={venture.title} className="rounded-[2rem] border border-[var(--border)] bg-[var(--surface)] p-6">
@@ -632,11 +612,7 @@ export function PortfolioPage({ locale }: { locale: Locale }) {
         </section>
 
         <section id="contact" className="py-20">
-          <div className="mb-10 flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--text-muted)]">
-            <span className="text-[var(--accent)]">{"// contact"}</span>
-            <span className="inline-block h-px w-14 bg-[var(--border)]" />
-            <span>08</span>
-          </div>
+          <SectionMark locale={locale} label={{ id: "Kontak", en: "Contact" }} />
 
           <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
             <div>
