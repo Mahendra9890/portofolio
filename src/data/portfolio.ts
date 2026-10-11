@@ -26,7 +26,7 @@ export const portfolioData: PortfolioData = {
     whatsapp: "+62 823-4030-2661",
     github: "https://github.com/Mahendra9890",
     linkedin: "https://www.linkedin.com/in/prabumahendra/",
-    instagram: "https://www.instagram.com/prab.skii",
+    instagram: "https://www.instagram.com/mahendr4k?utm_source=ig_web_button_share_sheet&obrf=ZDNlZDc0MzIxNw==",
     cv: "mailto:prabumahendra255@gmail.com?subject=Request%20for%20Prabu%20Mahendra%20CV",
     headline: {
       id: "Mahasiswa Computer Science BINUS · Software Engineering · Frontend Developer",
@@ -473,7 +473,7 @@ export const portfolioData: PortfolioData = {
   socials: [
     { name: "GitHub", href: "https://github.com/Mahendra9890", icon: "github" },
     { name: "LinkedIn", href: "https://www.linkedin.com/in/prabumahendra/", icon: "linkedin" },
-    { name: "Instagram", href: "https://www.instagram.com/prab.skii", icon: "instagram" },
+    { name: "Instagram", href: "https://www.instagram.com/mahendr4k?utm_source=ig_web_button_share_sheet&obrf=ZDNlZDc0MzIxNw==", icon: "instagram" },
     { name: "Email", href: "mailto:prabumahendra255@gmail.com", icon: "mail" },
   ],
 };

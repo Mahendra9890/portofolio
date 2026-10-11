@@ -85,7 +85,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
               sameAs: [
                 "https://github.com/Mahendra9890",
                 "https://www.linkedin.com/in/prabumahendra/",
-                "https://www.instagram.com/prab.skii",
+                "https://www.instagram.com/mahendr4k?utm_source=ig_web_button_share_sheet&obrf=ZDNlZDc0MzIxNw==",
               ],
             }),
           }}
