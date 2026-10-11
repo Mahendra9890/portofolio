@@ -321,6 +321,9 @@ export const portfolioData: PortfolioData = {
         en: "Designed the UI/UX and built the frontend of a student freelance platform showcased at the BINUS Computer Science Festival 2026.",
       },
       tags: ["UI/UX", "Frontend", "Team Project"],
+      links: [
+        { label: { id: "Kunjungi Website", en: "Visit Website" }, url: "https://www.stairslife.com/" },
+      ],
     },
     {
       role: { id: "Peserta Pengabdian Masyarakat", en: "Community Service Participant" },
@@ -342,6 +345,11 @@ export const portfolioData: PortfolioData = {
         en: "Built the brand website, managed three marketplaces, and set pricing and fulfillment SOPs.",
       },
       tags: ["Web Development", "E-commerce", "Leadership"],
+      links: [
+        { label: { id: "Website", en: "Website" }, url: "https://picachocolatebali.com/" },
+        { label: { id: "Instagram", en: "Instagram" }, url: "https://www.instagram.com/picachocolate.bali" },
+        { label: { id: "Shopee", en: "Shopee" }, url: "https://id.shp.ee/H1v34Fuj" },
+      ],
     },
     {
       role: { id: "Founder", en: "Founder" },
@@ -352,16 +360,22 @@ export const portfolioData: PortfolioData = {
         en: "Researched zoning and handled property marketing for areas in Badung and Gianyar.",
       },
       tags: ["Business", "Research"],
+      links: [
+        { label: { id: "Kunjungi Instagram", en: "Visit Instagram" }, url: "https://www.instagram.com/niwasa_property_bali/" },
+      ],
     },
     {
       role: { id: "Independent Online Seller", en: "Independent Online Seller" },
-      organization: "Self-started",
+      organization: "Self-started · Fitted Caps",
       period: "Sejak SMP",
       summary: {
         id: "Memulai jualan online sendiri sejak SMP, dari pencarian produk hingga pengiriman dan customer service.",
         en: "Started selling online on my own in junior high, covering product sourcing, listings, customer care, and delivery.",
       },
       tags: ["Self-starter", "E-commerce", "Ownership"],
+      links: [
+        { label: { id: "Kunjungi Shopee", en: "Visit Shopee" }, url: "https://shopee.co.id/shop/164112122" },
+      ],
     },
   ],
   awards: [
@@ -432,8 +446,11 @@ export const portfolioData: PortfolioData = {
       },
       metrics: ["Website & brand", "3 marketplace", "Pricing & SOP"],
       image: "/images/pica-chocolate.png",
-      url: "https://picachocolatebali.com/",
-      urlLabel: { id: "Kunjungi Website", en: "Visit Website" },
+      links: [
+        { label: { id: "Website", en: "Website" }, url: "https://picachocolatebali.com/" },
+        { label: { id: "Instagram", en: "Instagram" }, url: "https://www.instagram.com/picachocolate.bali" },
+        { label: { id: "Shopee", en: "Shopee" }, url: "https://id.shp.ee/H1v34Fuj" },
+      ],
     },
     {
       title: "Niwasa Property Bali",
@@ -445,21 +462,23 @@ export const portfolioData: PortfolioData = {
       metrics: ["Zonasi area", "Market research", "Branding"],
       image: "/images/niwasa.jpg",
       imageFit: "contain",
-      url: "https://www.instagram.com/niwasa_property_bali/",
-      urlLabel: { id: "Kunjungi Instagram", en: "Visit Instagram" },
+      links: [
+        { label: { id: "Kunjungi Instagram", en: "Visit Instagram" }, url: "https://www.instagram.com/niwasa_property_bali/" },
+      ],
     },
     {
       title: "Fitted Caps",
       period: "Usaha mandiri · Independent venture",
       description: {
-        id: "Menjalankan usaha Fitted Caps dan membangun koneksi dengan pelanggan melalui Instagram.",
-        en: "Running Fitted Caps and connecting with customers through Instagram.",
+        id: "Menjalankan usaha Fitted Caps dan menjual produk lewat Shopee.",
+        en: "Running Fitted Caps and selling products through Shopee.",
       },
-      metrics: ["Fitted caps", "Instagram business"],
+      metrics: ["Fitted caps", "Shopee shop"],
       image: "/images/fitted-caps.jpg",
       imageFit: "contain",
-      url: "https://www.instagram.com/fitted_caps__/",
-      urlLabel: { id: "Kunjungi Instagram", en: "Visit Instagram" },
+      links: [
+        { label: { id: "Kunjungi Shopee", en: "Visit Shopee" }, url: "https://shopee.co.id/shop/164112122" },
+      ],
     },
   ],
   research: {

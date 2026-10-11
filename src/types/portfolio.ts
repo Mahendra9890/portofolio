@@ -91,6 +91,11 @@ export type Project = {
   }>;
 };
 
+export type ExternalLink = {
+  label: LocalizedText;
+  url: string;
+};
+
 export type ExperienceItem = {
   role: LocalizedText;
   organization: string;
@@ -98,6 +103,7 @@ export type ExperienceItem = {
   summary: LocalizedText;
   tags: string[];
   image?: string;
+  links?: ExternalLink[];
 };
 
 export type AwardItem = {
@@ -128,6 +134,7 @@ export type VentureItem = {
   imageFit?: "cover" | "contain";
   url?: string;
   urlLabel?: LocalizedText;
+  links?: ExternalLink[];
 };
 
 export type ResearchItem = {

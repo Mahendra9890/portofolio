@@ -506,6 +506,22 @@ export function PortfolioPage({ locale }: { locale: Locale }) {
                       <span key={tag} className="rounded-full border border-[var(--border)] px-2.5 py-1 text-[10px] uppercase tracking-[0.14em] text-[var(--text-muted)]">{tag}</span>
                     ))}
                   </div>
+                  {experience.links && experience.links.length > 0 && (
+                    <div className="mt-5 flex flex-wrap gap-2">
+                      {experience.links.map((link) => (
+                        <a
+                          key={link.url}
+                          href={link.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 rounded-full border border-[var(--border)] px-4 py-2 text-xs font-medium text-[var(--text)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
+                        >
+                          {getText(link.label, locale)}
+                          <ArrowRight size={12} />
+                        </a>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
@@ -621,10 +637,21 @@ export function PortfolioPage({ locale }: { locale: Locale }) {
                     <span key={metric} className="rounded-full border border-[var(--border)] px-2.5 py-1 text-[10px] uppercase tracking-[0.14em] text-[var(--text-muted)]">{metric}</span>
                   ))}
                 </div>
-                {venture.url && (
-                  <a href={venture.url} target="_blank" rel="noopener noreferrer" className="mt-5 inline-flex rounded-full border border-[var(--border)] px-4 py-2 text-xs font-medium text-[var(--text)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]">
-                    {venture.urlLabel ? getText(venture.urlLabel, locale) : locale === "id" ? "Kunjungi" : "Visit"}
-                  </a>
+                {(venture.links?.length || venture.url) && (
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    {(venture.links ?? (venture.url ? [{ label: venture.urlLabel ?? { id: "Kunjungi", en: "Visit" }, url: venture.url }] : [])).map((link) => (
+                      <a
+                        key={link.url}
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 rounded-full border border-[var(--border)] px-4 py-2 text-xs font-medium text-[var(--text)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
+                      >
+                        {getText(link.label, locale)}
+                        <ArrowRight size={12} />
+                      </a>
+                    ))}
+                  </div>
                 )}
               </div>
             ))}
