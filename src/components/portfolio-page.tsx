@@ -247,7 +247,7 @@ export function PortfolioPage({ locale }: { locale: Locale }) {
               <div className="overflow-hidden rounded-[2rem] border border-[var(--border)] bg-[var(--surface)] p-3">
                 <div className="group relative aspect-[4/5] overflow-hidden rounded-[1.5rem]" tabIndex={0} aria-label="Portrait of Prabu Mahendra; hover to see a casual portrait">
                   <Image src="/images/profile-web.png" alt="Prabu Mahendra in a formal portrait" fill sizes="(max-width: 1024px) 90vw, 32vw" className="object-cover object-[center_top] transition-opacity duration-300 group-hover:opacity-0 group-focus:opacity-0" />
-                  <Image src="/images/profile-casual.jpg" alt="Prabu Mahendra wearing a blue polo shirt" fill sizes="(max-width: 1024px) 90vw, 32vw" className="object-cover object-[center_top] opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus:opacity-100" />
+                  <Image src="/images/profile-casual.jpg" alt="Prabu Mahendra wearing sunglasses" fill sizes="(max-width: 1024px) 90vw, 32vw" className="object-cover object-[center_top] opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus:opacity-100" />
                 </div>
               </div>
             </div>
