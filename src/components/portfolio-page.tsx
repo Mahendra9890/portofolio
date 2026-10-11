@@ -551,7 +551,7 @@ export function PortfolioPage({ locale }: { locale: Locale }) {
                 </div>
                 {venture.url && (
                   <a href={venture.url} target="_blank" rel="noopener noreferrer" className="mt-5 inline-flex rounded-full border border-[var(--border)] px-4 py-2 text-xs font-medium text-[var(--text)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]">
-                    {locale === "id" ? "Kunjungi Instagram" : "Visit Instagram"}
+                    {venture.urlLabel ? getText(venture.urlLabel, locale) : locale === "id" ? "Kunjungi" : "Visit"}
                   </a>
                 )}
               </div>

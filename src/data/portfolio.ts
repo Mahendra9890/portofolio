@@ -425,6 +425,8 @@ export const portfolioData: PortfolioData = {
       },
       metrics: ["Website & brand", "3 marketplace", "Pricing & SOP"],
       image: "/images/pica-chocolate.png",
+      url: "https://picachocolatebali.com/",
+      urlLabel: { id: "Kunjungi Website", en: "Visit Website" },
     },
     {
       title: "Niwasa Property Bali",
@@ -435,6 +437,8 @@ export const portfolioData: PortfolioData = {
       },
       metrics: ["Zonasi area", "Market research", "Branding"],
       image: "/images/niwasa.jpg",
+      url: "https://www.instagram.com/niwasa_property_bali?utm_source=ig_web_button_share_sheet&rpxt=ZDNlZDc0MzIxNw==",
+      urlLabel: { id: "Kunjungi Instagram", en: "Visit Instagram" },
     },
     {
       title: "Fitted Caps",
@@ -446,6 +450,7 @@ export const portfolioData: PortfolioData = {
       metrics: ["Fitted caps", "Instagram business"],
       image: "/images/fitted-caps.jpg",
       url: "https://www.instagram.com/fitted_caps__?xtok=MWsyaGp2cmJzZ3E5aw%3D%3D&utm_source=qr",
+      urlLabel: { id: "Kunjungi Instagram", en: "Visit Instagram" },
     },
   ],
   research: {
