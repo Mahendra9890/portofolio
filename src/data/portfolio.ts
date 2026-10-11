@@ -55,7 +55,7 @@ export const portfolioData: PortfolioData = {
   stats: [
     { value: "10+", label: { id: "Proyek dibangun", en: "Projects built" } },
     { value: "14", label: { id: "Repository GitHub", en: "GitHub repositories" } },
-    { value: "4", label: { id: "Penghargaan kompetisi", en: "Competition awards" } },
+    { value: "5", label: { id: "Penghargaan kompetisi", en: "Competition awards" } },
     { value: "3", label: { id: "Marketplace dikelola", en: "Marketplaces managed" } },
   ],
   education: {
@@ -192,14 +192,14 @@ export const portfolioData: PortfolioData = {
         { id: "catalog", title: { id: "Katalog produk", en: "Product catalog" }, description: { id: "Produk ditampilkan dengan narasi brand dan detail yang jelas.", en: "Products are presented with brand storytelling and clear details." } },
         { id: "chat", title: { id: "Pemesanan via WhatsApp", en: "WhatsApp ordering" }, description: { id: "Pembeli dapat langsung melakukan pemesanan tanpa hambatan.", en: "Customers can place orders directly without friction." } },
       ],
-      coverImage: "/images/covers/pica-chocolate.svg",
+      coverImage: "/images/pica-chocolate.png",
       gallery: [],
       liveUrl: "https://picachocolatebali.com",
       featured: false,
     },
     {
       slug: "web-coffe",
-      title: "WEB.COFFE",
+      title: "MR.COFFEE",
       year: 2023,
       role: { id: "Developer", en: "Developer" },
       team: "Personal project",
@@ -224,10 +224,45 @@ export const portfolioData: PortfolioData = {
       features: [
         { id: "layout", title: { id: "Layout modern", en: "Modern layout" }, description: { id: "Visual yang bersih dan menarik untuk brand coffee.", en: "Clean and engaging visual design for a coffee brand." } },
       ],
-      coverImage: "/images/covers/web-coffe.svg",
+      coverImage: "/images/mr-coffee.png",
       gallery: [],
       repoUrl: "https://github.com/Mahendra9890/WEB.COFFE",
+      liveUrl: "https://mr-coffe.vercel.app",
       featured: false,
+    },
+    {
+      slug: "bluetooth-robot-2021",
+      title: "Bluetooth Firefighting Robot",
+      year: 2021,
+      role: { id: "Builder (solo)", en: "Builder (solo)" },
+      team: "Individual project",
+      category: "Robotics",
+      stack: ["Arduino", "Bluetooth", "Ultrasonic Sensor"],
+      summary: {
+        id: "Robot rakitan sendiri yang dikendalikan lewat aplikasi smartphone via Bluetooth, dilengkapi sensor ultrasonik, modul kipas, dan sasis akrilik dua tingkat. Meraih Juara Favorit 2021.",
+        en: "A self-built robot controlled by a smartphone app over Bluetooth, featuring an ultrasonic sensor, fan module, and two-tier acrylic chassis. Won Favorite Winner in 2021.",
+      },
+      problem: {
+        id: "Menyelesaikan tantangan robotika dengan kendali jarak jauh sekaligus merancang robot yang dapat mendeteksi dan memadamkan api.",
+        en: "Complete a robotics challenge with remote control while designing a robot that can detect and extinguish a fire.",
+      },
+      solution: {
+        id: "Merakit robot Arduino kendali Bluetooth melalui aplikasi smartphone, sensor ultrasonik, modul kipas, dan sasis akrilik dua tingkat.",
+        en: "Built an Arduino robot controlled by a smartphone over Bluetooth, with an ultrasonic sensor, fan module, and two-tier acrylic chassis.",
+      },
+      result: {
+        id: "Meraih Juara Favorit pada Arduino Challenge 2021.",
+        en: "Won the Favorite Winner award at Arduino Challenge 2021.",
+      },
+      features: [
+        { id: "bluetooth-control", title: { id: "Kendali Bluetooth", en: "Bluetooth control" }, description: { id: "Robot dikendalikan dari aplikasi smartphone.", en: "Controlled remotely from a smartphone app." } },
+        { id: "fire-detection", title: { id: "Sensor ultrasonik & kipas", en: "Ultrasonic sensor & fan" }, description: { id: "Sensor dan modul kipas mendukung misi pemadaman api.", en: "Sensor and fan module support the firefighting challenge." } },
+        { id: "chassis", title: { id: "Sasis akrilik dua tingkat", en: "Two-tier acrylic chassis" }, description: { id: "Rangka akrilik menyusun komponen robot dalam dua tingkat.", en: "A two-tier acrylic frame houses the robot components." } },
+      ],
+      coverImage: "/images/arduino-robot.jpg",
+      gallery: [],
+      featured: false,
+      highlight: true,
     },
     {
       slug: "company-profile",
@@ -338,6 +373,17 @@ export const portfolioData: PortfolioData = {
       tags: ["UI/UX", "Frontend", "Team Project"],
     },
     {
+      role: { id: "Peserta Pengabdian Masyarakat", en: "Community Service Participant" },
+      organization: "Keluarga Mahasiswa Hindu (KMH) BINUS University",
+      period: "Semester Ganjil 2024",
+      summary: {
+        id: "Berpartisipasi dalam kegiatan pengabdian masyarakat selama 10 jam bersama KMH BINUS University.",
+        en: "Contributed 10 hours to a community-service program with KMH BINUS University.",
+      },
+      tags: ["Community Service", "Teamwork"],
+      image: "/images/kmh-binus.jpg",
+    },
+    {
       role: { id: "Founder & Online Channel Manager", en: "Founder & Online Channel Manager" },
       organization: "Pica Chocolate Bali",
       period: "2023 sampai sekarang",
@@ -369,6 +415,16 @@ export const portfolioData: PortfolioData = {
     },
   ],
   awards: [
+    {
+      title: "Juara Favorit (Favorite Winner)",
+      event: "Arduino Challenge 2021",
+      organizer: "Arduino Challenge",
+      date: "2021",
+      level: "Kompetisi",
+      image: "/images/arduino-robot.jpg",
+      highlight: true,
+      badge: "gold",
+    },
     {
       title: "Lolos 8 Besar Sumo",
       event: "EVOLUTION ITS, Paper dan Robotic Competition BARONAS 2024",
@@ -423,6 +479,7 @@ export const portfolioData: PortfolioData = {
         en: "Managed the brand website, marketplace sales, and operational SOPs from product to delivery.",
       },
       metrics: ["Website & brand", "3 marketplace", "Pricing & SOP"],
+      image: "/images/pica-chocolate.png",
     },
     {
       title: "Niwasa Property Bali",

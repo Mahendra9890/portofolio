@@ -72,7 +72,7 @@ export type Project = {
   year: number;
   role: LocalizedText;
   team: string;
-  category: "Web" | "Web App" | "AI/Research" | "Fundamentals";
+  category: "Web" | "Web App" | "AI/Research" | "Fundamentals" | "Robotics";
   stack: string[];
   summary: LocalizedText;
   problem: LocalizedText;
@@ -96,6 +96,7 @@ export type ExperienceItem = {
   period: string;
   summary: LocalizedText;
   tags: string[];
+  image?: string;
 };
 
 export type AwardItem = {
@@ -106,6 +107,7 @@ export type AwardItem = {
   level: string;
   image: string;
   highlight?: boolean;
+  badge?: "gold";
 };
 
 export type JourneyStep = {
@@ -118,6 +120,7 @@ export type VentureItem = {
   period: string;
   description: LocalizedText;
   metrics: string[];
+  image?: string;
 };
 
 export type ResearchItem = {

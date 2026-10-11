@@ -23,13 +23,13 @@ export async function generateMetadata({
         title: "Prabu Mahendra | Software Engineer Intern",
         description:
           "Computer Science student at BINUS University, focused on frontend engineering and UI/UX. Open to internship opportunities.",
-        openGraph: { locale: "en_US" },
+        openGraph: { locale: "en_US", images: ["/images/profile-web.png"] },
       }
     : {
         title: "Prabu Mahendra | Software Engineer & Frontend Developer",
         description:
           "Portofolio Prabu Mahendra, mahasiswa Computer Science BINUS yang berfokus pada frontend engineering dan UI/UX, terbuka untuk magang.",
-        openGraph: { locale: "id_ID" },
+        openGraph: { locale: "id_ID", images: ["/images/profile-web.png"] },
       };
 }
 

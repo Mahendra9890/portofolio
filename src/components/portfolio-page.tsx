@@ -182,7 +182,7 @@ export function PortfolioPage({ locale }: { locale: Locale }) {
               <div className="relative overflow-hidden rounded-[2rem] border border-[var(--border)] bg-[var(--surface)] p-4 shadow-[0_20px_60px_rgba(0,0,0,0.3)]">
                 <div className="absolute inset-0 bg-[linear-gradient(135deg,_rgba(255,255,255,0.05),_transparent_40%)]" />
                 <div className="relative aspect-square overflow-hidden rounded-[1.5rem] border border-[var(--border)]">
-                  <Image src="/images/profile-formal.jpg" alt="Prabu Mahendra portrait" fill sizes="(max-width: 1024px) 90vw, 42vw" className="object-cover" loading="eager" />
+                  <Image src="/images/profile-web.png" alt="Prabu Mahendra in a formal portrait" fill sizes="(max-width: 1024px) 90vw, 42vw" className="object-cover object-[center_top]" loading="eager" />
                 </div>
               </div>
             </motion.div>
@@ -214,8 +214,9 @@ export function PortfolioPage({ locale }: { locale: Locale }) {
           <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
             <div className="relative">
               <div className="overflow-hidden rounded-[2rem] border border-[var(--border)] bg-[var(--surface)] p-3">
-                <div className="relative aspect-[4/5] overflow-hidden rounded-[1.5rem]">
-                  <Image src="/images/profile-formal.jpg" alt="Prabu Mahendra in formal attire" fill sizes="(max-width: 1024px) 90vw, 32vw" className="object-cover" />
+                <div className="group relative aspect-[4/5] overflow-hidden rounded-[1.5rem]" tabIndex={0} aria-label="Portrait of Prabu Mahendra; hover to see a casual portrait">
+                  <Image src="/images/profile-web.png" alt="Prabu Mahendra in a formal portrait" fill sizes="(max-width: 1024px) 90vw, 32vw" className="object-cover object-[center_top] transition-opacity duration-300 group-hover:opacity-0 group-focus:opacity-0" />
+                  <Image src="/images/profile-casual.jpg" alt="Prabu Mahendra wearing a blue polo shirt" fill sizes="(max-width: 1024px) 90vw, 32vw" className="object-cover object-[center_top] opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus:opacity-100" />
                 </div>
               </div>
             </div>
@@ -250,6 +251,19 @@ export function PortfolioPage({ locale }: { locale: Locale }) {
               </div>
             </div>
           </div>
+
+          <figure className="relative mt-16 aspect-[16/7] overflow-hidden rounded-[2rem] border border-[var(--border)] bg-[var(--surface)]">
+            <Image
+              src="/images/kmh-binus.jpg"
+              alt="BINUS University Hindu Student Family community-service group in Bali"
+              fill
+              sizes="(max-width: 768px) 100vw, 90vw"
+              className="object-cover object-[center_top]"
+            />
+            <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent px-6 pb-5 pt-16 text-sm font-medium text-white sm:px-8">
+              {locale === "id" ? "Pengabdian masyarakat bersama KMH BINUS University · 2024" : "Community service with KMH BINUS University · 2024"}
+            </figcaption>
+          </figure>
 
           <div className="mt-16">
             <div className="mb-8 flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--text-muted)]">
@@ -396,6 +410,11 @@ export function PortfolioPage({ locale }: { locale: Locale }) {
                   <div className="text-[10px] uppercase tracking-[0.2em] text-[var(--text-muted)]">{experience.period}</div>
                   <h3 className="mt-2 text-2xl font-semibold tracking-[-0.04em]">{getText(experience.role, locale)}</h3>
                   <div className="mt-2 text-base font-medium text-[var(--accent)]">{experience.organization}</div>
+                  {experience.image && (
+                    <div className="relative mt-4 aspect-[16/7] max-w-3xl overflow-hidden rounded-2xl">
+                      <Image src={experience.image} alt={`${experience.organization} community-service group photo`} fill sizes="(max-width: 768px) 100vw, 75vw" className="object-cover object-[center_top]" />
+                    </div>
+                  )}
                   <p className="mt-3 max-w-3xl text-base leading-7 text-[var(--text-muted)]">{getText(experience.summary, locale)}</p>
                   <div className="mt-4 flex flex-wrap gap-2">
                     {experience.tags.map((tag) => (
@@ -419,11 +438,15 @@ export function PortfolioPage({ locale }: { locale: Locale }) {
             {portfolioData.awards.map((award) => (
               <div key={award.title} className={`rounded-[2rem] border border-[var(--border)] bg-[var(--surface)] p-4 ${award.highlight ? "ring-1 ring-[var(--accent)]" : ""}`}>
                 <div className="relative aspect-[4/3] overflow-hidden rounded-[1.25rem] border border-[var(--border)]">
-                  <Image src={award.image} alt={award.title} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
+                  <Image src={award.image} alt={award.badge === "gold" ? "Arduino robot built for the 2021 challenge" : award.title} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
                 </div>
                 <div className="mt-4 flex items-center justify-between gap-3">
                   <h3 className="text-xl font-semibold tracking-[-0.04em]">{award.title}</h3>
-                  {award.highlight && <span className="rounded-full bg-[var(--accent)] px-2 py-1 text-[9px] uppercase tracking-[0.16em] text-[#111111]">Highlight</span>}
+                  {award.badge === "gold" ? (
+                    <span className="rounded-full border border-amber-300/60 bg-gradient-to-r from-amber-200 via-yellow-400 to-amber-500 px-3 py-1.5 text-[9px] font-bold uppercase tracking-[0.16em] text-amber-950 shadow-[0_0_18px_rgba(245,190,55,0.28)]">
+                      {locale === "id" ? "Emas" : "Gold"}
+                    </span>
+                  ) : award.highlight && <span className="rounded-full bg-[var(--accent)] px-2 py-1 text-[9px] uppercase tracking-[0.16em] text-[#111111]">Highlight</span>}
                 </div>
                 <p className="mt-3 text-sm text-[var(--text-muted)]">{award.event}</p>
                 <div className="mt-3 text-[11px] uppercase tracking-[0.16em] text-[var(--text-muted)]">{award.organizer}</div>
@@ -482,6 +505,11 @@ export function PortfolioPage({ locale }: { locale: Locale }) {
           <div className="grid gap-5 lg:grid-cols-2">
             {portfolioData.ventures.map((venture) => (
               <div key={venture.title} className="rounded-[2rem] border border-[var(--border)] bg-[var(--surface)] p-6">
+                {venture.image && (
+                  <div className="relative mb-5 aspect-[16/7] overflow-hidden rounded-2xl">
+                    <Image src={venture.image} alt={`${venture.title} website project cover`} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
+                  </div>
+                )}
                 <div className="mb-4 text-[10px] uppercase tracking-[0.2em] text-[var(--text-muted)]">{venture.period}</div>
                 <h3 className="text-2xl font-semibold tracking-[-0.04em]">{venture.title}</h3>
                 <p className="mt-4 text-base leading-7 text-[var(--text-muted)]">{getText(venture.description, locale)}</p>
