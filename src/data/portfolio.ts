@@ -1,5 +1,7 @@
 import type { PortfolioData } from "@/types/portfolio";
 
+const instagramUrl = "https://www.instagram.com/mahendr4k/";
+
 export const portfolioData: PortfolioData = {
   profile: {
     fullName: "I Made Prabu Mahendra Putra Rebawa",
@@ -26,7 +28,7 @@ export const portfolioData: PortfolioData = {
     whatsapp: "+62 823-4030-2661",
     github: "https://github.com/Mahendra9890",
     linkedin: "https://www.linkedin.com/in/prabumahendra/",
-    instagram: "https://www.instagram.com/mahendr4k?utm_source=ig_web_button_share_sheet&obrf=ZDNlZDc0MzIxNw==",
+    instagram: instagramUrl,
     cv: "mailto:prabumahendra255@gmail.com?subject=Request%20for%20Prabu%20Mahendra%20CV",
     headline: {
       id: "Mahasiswa Computer Science BINUS · Software Engineering · Frontend Developer",
@@ -127,7 +129,7 @@ export const portfolioData: PortfolioData = {
     {
       slug: "lstm-xgboost-bms",
       title: "Hybrid LSTM-XGBoost Stacking Ensemble for Multi-Condition Battery Management System Optimization in Electric Vehicles",
-      year: 2024,
+      year: 2026,
       role: { id: "Peneliti & Pengembang Model AI", en: "Researcher & AI Model Developer" },
       team: "BINUS University",
       authors: "I Made Prabu Mahendra Putra Rebawa, Michael Jemmy Tanzel, Nikita Ananda Putri Masaling, Edy Irwansyah (BINUS University)",
@@ -241,29 +243,32 @@ export const portfolioData: PortfolioData = {
     {
       slug: "web-coffe",
       title: "MR.COFFEE",
-      year: 2023,
-      role: { id: "Developer", en: "Developer" },
+      year: 2025,
+      role: { id: "Frontend Developer (solo)", en: "Frontend Developer (solo)" },
       team: "Personal project",
       category: "Web",
-      stack: ["HTML", "CSS", "JavaScript"],
+      stack: ["HTML", "CSS", "JavaScript", "GitHub", "Vercel"],
       summary: {
-        id: "Landing page brand coffee dengan konsep modern dan fokus pada pengalaman browsing produk.",
-        en: "Coffee brand landing page with a modern feel and product-first browsing experience.",
+        id: "Website konsep coffee shop dengan cerita brand, menu berfilter, dan jalur pemesanan cepat. Live di Vercel sejak Mei 2025.",
+        en: "A coffee shop concept website with brand story, filterable menu, and a fast path to order. Live on Vercel since May 2025.",
       },
       problem: {
-        id: "Brand membutuhkan tampilan digital yang lebih menarik untuk menonjol di pasar lokal.",
-        en: "The brand needed a more attractive digital presence to stand out locally.",
+        id: "Coffee shop kecil butuh satu tempat untuk menampilkan cerita, menu, dan cara memesan.",
+        en: "A small coffee shop needs one place to show its story, its menu, and how to order.",
       },
       solution: {
-        id: "Mendesain layout yang bersih, cepat, dan easy-to-scan untuk menjelaskan produk dan nilai brand.",
-        en: "Designed a clean, fast layout that clearly communicates the product and the brand value.",
+        id: "Membangun website dengan CTA \"Order Now\", menu 10 item dengan filter Coffee, Non-Coffee, dan Snack, halaman order dari setiap produk, serta kontak dengan Google Map.",
+        en: "Built a site with an \"Order Now\" CTA, a 10-item menu filtered by Coffee, Non-Coffee, and Snack, an order page linked from every product, and a contact section with Google Map.",
       },
       result: {
-        id: "Proyek menjadi latihan desain web responsif yang fokus pada komunikasi visual.",
-        en: "The project became a responsive web design exercise focused on visual communication.",
+        id: "Situs live dengan auto-deploy dari GitHub ke Vercel. Pelajaran utama: filter mempercepat pencarian menu, setiap halaman butuh satu aksi utama, dan situs live mengungkap masalah nyata.",
+        en: "A live site with auto-deploys from GitHub to Vercel. Key lessons: filters speed up menu scanning, every page needs one clear action, and a live site exposes real problems.",
       },
       features: [
-        { id: "layout", title: { id: "Layout modern", en: "Modern layout" }, description: { id: "Visual yang bersih dan menarik untuk brand coffee.", en: "Clean and engaging visual design for a coffee brand." } },
+        { id: "cta", title: { id: "Hero dengan Order Now", en: "Hero with Order Now" }, description: { id: "CTA pemesanan yang jelas sejak layar pertama.", en: "A clear ordering call to action on the first screen." } },
+        { id: "menu-filter", title: { id: "Menu berfilter", en: "Filterable menu" }, description: { id: "10 item dengan filter Coffee, Non-Coffee, dan Snack.", en: "10 items filtered by Coffee, Non-Coffee, and Snack." } },
+        { id: "order", title: { id: "Halaman order", en: "Order page" }, description: { id: "Setiap produk terhubung ke halaman order.", en: "Every product links to the order page." } },
+        { id: "contact", title: { id: "Kontak & Google Map", en: "Contact & Google Map" }, description: { id: "Form kontak dan peta lokasi tertanam.", en: "Contact form and an embedded location map." } },
       ],
       coverImage: "/images/mr-coffee.png",
       gallery: [],
@@ -404,16 +409,18 @@ export const portfolioData: PortfolioData = {
       date: "13 September 2019",
       level: "Provinsi",
       image: "/images/cert-rotechtion-2019.jpg",
+      photo: "/images/rotechtion-2019-trophy.jpg",
       highlight: true,
     },
   ],
   journey: [
-    { label: "SMP", title: "Mulai jualan online sendiri" },
-    { label: "2019", title: "Robotik (Juara II Sumobot Bali)" },
-    { label: "2022", title: "Web Design (Juara 3 ITCC)" },
-    { label: "2024", title: "Robotik Nasional (8 Besar BARONAS ITS)" },
-    { label: "BINUS", title: "Computer Science" },
-    { label: "2026", title: "StairsLife di CS Festival" },
+    { label: "SMP", title: { id: "Mulai jualan online sendiri", en: "Started selling online" } },
+    { label: "2019", title: { id: "Juara II Sumobot Bali", en: "2nd place, Bali Sumobot" } },
+    { label: "2021", title: { id: "Juara Favorit Arduino Challenge", en: "Favorite Winner, Arduino Challenge" } },
+    { label: "2022", title: { id: "Juara 3 Web Design ITCC", en: "3rd place, ITCC Web Design" } },
+    { label: "2024", title: { id: "8 Besar BARONAS ITS", en: "Top 8, BARONAS ITS" } },
+    { label: "2025", title: { id: "MR.COFFEE live", en: "MR.COFFEE goes live" } },
+    { label: "2026", title: { id: "StairsLife di CS Festival", en: "StairsLife at CS Festival" } },
   ],
   ventures: [
     {
@@ -437,7 +444,8 @@ export const portfolioData: PortfolioData = {
       },
       metrics: ["Zonasi area", "Market research", "Branding"],
       image: "/images/niwasa.jpg",
-      url: "https://www.instagram.com/niwasa_property_bali?utm_source=ig_web_button_share_sheet&rpxt=ZDNlZDc0MzIxNw==",
+      imageFit: "contain",
+      url: "https://www.instagram.com/niwasa_property_bali/",
       urlLabel: { id: "Kunjungi Instagram", en: "Visit Instagram" },
     },
     {
@@ -449,15 +457,16 @@ export const portfolioData: PortfolioData = {
       },
       metrics: ["Fitted caps", "Instagram business"],
       image: "/images/fitted-caps.jpg",
-      url: "https://www.instagram.com/fitted_caps__?xtok=MWsyaGp2cmJzZ3E5aw%3D%3D&utm_source=qr",
+      imageFit: "contain",
+      url: "https://www.instagram.com/fitted_caps__/",
       urlLabel: { id: "Kunjungi Instagram", en: "Visit Instagram" },
     },
   ],
   research: {
     title: "Hybrid LSTM-XGBoost Stacking Ensemble for Multi-Condition Battery Management System Optimization in Electric Vehicles",
-    venue: "IEEE/Research Publication",
-    year: 2024,
-    status: "Published / Research",
+    venue: "IEEE Paper · BINUS University",
+    year: 2026,
+    status: "Research Paper",
     authors: "I Made Prabu Mahendra Putra Rebawa, Michael Jemmy Tanzel, Nikita Ananda Putri Masaling, Edy Irwansyah (BINUS University)",
     paperUrl: "/docs/lstm-xgboost-bms-paper.pdf",
     summary: {
@@ -470,15 +479,4 @@ export const portfolioData: PortfolioData = {
       { label: { id: "Deteksi anomali · F1-Score", en: "Anomaly detection · F1-Score" }, value: "1,000" },
     ],
   },
-  socials: [
-    { name: "GitHub", href: "https://github.com/Mahendra9890", icon: "github" },
-    { name: "LinkedIn", href: "https://www.linkedin.com/in/prabumahendra/", icon: "linkedin" },
-    { name: "Instagram", href: "https://www.instagram.com/mahendr4k?utm_source=ig_web_button_share_sheet&obrf=ZDNlZDc0MzIxNw==", icon: "instagram" },
-    { name: "Email", href: "mailto:prabumahendra255@gmail.com", icon: "mail" },
-  ],
-};
-
-export const localeLabels: Record<"id" | "en", string> = {
-  id: "ID",
-  en: "EN",
 };

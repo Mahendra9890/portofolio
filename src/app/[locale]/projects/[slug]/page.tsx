@@ -155,9 +155,9 @@ async function LocaleProjectDetailContent({
 
       <div className="mt-10 flex flex-wrap gap-3">
         {project.pdfUrl && <a href={project.pdfUrl} target="_blank" rel="noopener noreferrer" className="rounded-full bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-[#111111]">{project.pdfLabel ? localized(project.pdfLabel, currentLocale) : currentLocale === "id" ? "Buka PDF" : "Open PDF"}</a>}
-        {project.liveUrl && <a href={project.liveUrl} target="_blank" rel="noreferrer" className="rounded-full bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-[#111111]">{currentLocale === "id" ? "Buka proyek" : "Visit project"}</a>}
-        {project.repoUrl && <a href={project.repoUrl} target="_blank" rel="noreferrer" className="rounded-full border border-[var(--border)] px-5 py-3 text-sm font-semibold text-[var(--text)]">GitHub</a>}
-        {project.linkedinUrl && <a href={project.linkedinUrl} target="_blank" rel="noreferrer" className="rounded-full border border-[var(--border)] px-5 py-3 text-sm font-semibold text-[var(--text)]">LinkedIn</a>}
+        {project.liveUrl && <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="rounded-full bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-[#111111]">{currentLocale === "id" ? "Buka proyek" : "Visit project"}</a>}
+        {project.repoUrl && <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" className="rounded-full border border-[var(--border)] px-5 py-3 text-sm font-semibold text-[var(--text)]">GitHub</a>}
+        {project.linkedinUrl && <a href={project.linkedinUrl} target="_blank" rel="noopener noreferrer" className="rounded-full border border-[var(--border)] px-5 py-3 text-sm font-semibold text-[var(--text)]">LinkedIn</a>}
       </div>
     </main>
   );

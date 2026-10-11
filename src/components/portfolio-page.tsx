@@ -18,8 +18,9 @@ import {
   SunMedium,
   Users,
   Menu,
+  FileText,
 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { portfolioData } from "@/data/portfolio";
 import type { Locale } from "@/types/portfolio";
 
@@ -36,12 +37,17 @@ function getText(value: { id: string; en: string }, locale: Locale) {
   return locale === "en" ? value.en : value.id;
 }
 
+const projectCategoryOrder = ["Web App", "Web", "AI/Research", "Mobile App / UX Research", "Robotics"] as const;
+
 export function PortfolioPage({ locale }: { locale: Locale }) {
   const [theme, setTheme] = useState<"dark" | "light">("dark");
   const [mounted, setMounted] = useState(false);
   const [currentYear, setCurrentYear] = useState(2026);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const projectCategories = ["Web", "Web App", "AI/Research", "Robotics", "Mobile App / UX Research"].filter((category) =>
+  const [wordIndex, setWordIndex] = useState(0);
+  const mobileMenuRef = useRef<HTMLDetailsElement>(null);
+  const heroWords = portfolioData.profile.heroWords;
+  const projectCategories = projectCategoryOrder.filter((category) =>
     portfolioData.projects.some((project) => project.category === category),
   );
   const visibleProjects = portfolioData.projects.filter(
@@ -51,10 +57,7 @@ export function PortfolioPage({ locale }: { locale: Locale }) {
   useEffect(() => {
     document.documentElement.lang = locale;
     const frame = window.requestAnimationFrame(() => {
-      const saved = window.localStorage.getItem("theme");
-      const nextTheme = saved === "light" ? "light" : "dark";
-      setTheme(nextTheme);
-      document.documentElement.dataset.theme = nextTheme;
+      setTheme(document.documentElement.dataset.theme === "light" ? "light" : "dark");
       setCurrentYear(new Date().getFullYear());
       setMounted(true);
     });
@@ -65,12 +68,26 @@ export function PortfolioPage({ locale }: { locale: Locale }) {
   useEffect(() => {
     if (!mounted) return;
     document.documentElement.dataset.theme = theme;
-    window.localStorage.setItem("theme", theme);
+    try {
+      window.localStorage.setItem("theme", theme);
+    } catch {
+      // Storage can be blocked (private mode); the theme still applies for this visit.
+    }
   }, [mounted, theme]);
+
+  useEffect(() => {
+    if (heroWords.length < 2 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const timer = window.setInterval(() => {
+      setWordIndex((index) => (index + 1) % heroWords.length);
+    }, 2400);
+    return () => window.clearInterval(timer);
+  }, [heroWords.length]);
+
+  const closeMobileMenu = () => mobileMenuRef.current?.removeAttribute("open");
 
   return (
     <div className="min-h-screen bg-[var(--bg)] text-[var(--text)]">
-      <header className="sticky top-0 z-50 border-b border-[var(--border)] bg-[rgba(10,10,11,0.72)] backdrop-blur-xl">
+      <header className="sticky top-0 z-50 border-b border-[var(--border)] bg-[color-mix(in_srgb,var(--bg)_72%,transparent)] backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
           <Link href="#home" aria-label={locale === "id" ? "Kembali ke atas" : "Back to top"} className="flex items-center gap-3 text-sm font-semibold tracking-[0.2em] text-[var(--text)] uppercase">
             <span className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface)] text-xs tracking-[0.18em] text-[var(--accent)] transition-transform hover:scale-105">
@@ -89,7 +106,7 @@ export function PortfolioPage({ locale }: { locale: Locale }) {
           <div className="flex items-center gap-2">
             <Link
               href={locale === "id" ? "/en" : "/id"}
-                className="rounded-full border border-[var(--border)] px-3 py-1.5 text-[10px] uppercase tracking-[0.2em] text-[var(--text)]"
+              className="rounded-full border border-[var(--border)] px-3 py-1.5 text-[10px] uppercase tracking-[0.2em] text-[var(--text)]"
             >
               {locale === "id" ? "EN" : "ID"}
             </Link>
@@ -108,13 +125,13 @@ export function PortfolioPage({ locale }: { locale: Locale }) {
             >
               Hire Me
             </a>
-            <details className="relative md:hidden">
+            <details ref={mobileMenuRef} className="relative md:hidden">
               <summary className="flex h-10 w-10 cursor-pointer list-none items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface)] text-[var(--text)]" aria-label="Open navigation menu">
                 <Menu size={17} />
               </summary>
               <nav aria-label="Mobile navigation" className="absolute right-0 top-12 z-50 grid min-w-48 gap-1 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-2 shadow-xl">
                 {navItems.map((item) => (
-                  <a key={item.href} href={item.href} className="rounded-xl px-3 py-2 text-xs uppercase tracking-[0.14em] text-[var(--text-muted)] hover:bg-[var(--surface-2)] hover:text-[var(--text)]">
+                  <a key={item.href} href={item.href} onClick={closeMobileMenu} className="rounded-xl px-3 py-2 text-xs uppercase tracking-[0.14em] text-[var(--text-muted)] hover:bg-[var(--surface-2)] hover:text-[var(--text)]">
                     {getText(item.label, locale)}
                   </a>
                 ))}
@@ -144,9 +161,16 @@ export function PortfolioPage({ locale }: { locale: Locale }) {
 
               <div className="mt-5 flex min-h-[32px] items-center text-lg text-[var(--text-muted)] sm:text-xl">
                 <span className="mr-2 text-[var(--text)]">{locale === "id" ? "Saya adalah" : "I am"}</span>
-                <span className="font-medium text-[var(--accent)]">
-                  {portfolioData.profile.heroWords[0][locale]}
-                </span>
+                <motion.span
+                  key={wordIndex}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="font-medium text-[var(--accent)]"
+                  aria-live="polite"
+                >
+                  {heroWords[wordIndex][locale]}
+                </motion.span>
               </div>
 
               <p className="mt-6 max-w-xl text-base leading-7 text-[var(--text-muted)] sm:text-lg">
@@ -155,12 +179,11 @@ export function PortfolioPage({ locale }: { locale: Locale }) {
 
               <div className="mt-8 flex flex-wrap gap-4">
                 <a
-                  href="/docs/cv-prabu-mahendra.pdf"
+                  href={portfolioData.profile.cv}
                   className="inline-flex items-center gap-2 rounded-full bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-[#111111] transition-transform hover:scale-[1.02]"
                 >
-                  {/* TODO: upload CV */}
-                  <Mail size={16} />
-                  {locale === "id" ? "Download CV" : "Download CV"}
+                  <FileText size={16} />
+                  {locale === "id" ? "Minta CV" : "Request CV"}
                 </a>
                 <a
                   href="#projects"
@@ -242,7 +265,7 @@ export function PortfolioPage({ locale }: { locale: Locale }) {
                   { label: { id: "Lokasi", en: "Location" }, value: "Ubud, Bali" },
                   { label: { id: "Fokus", en: "Focus" }, value: "Frontend & UI/UX" },
                 ].map((item) => (
-                  <div key={item.label[locale]} className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4">
+                  <div key={item.label.en} className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4">
                     <div className="text-[10px] uppercase tracking-[0.2em] text-[var(--text-muted)]">{getText(item.label, locale)}</div>
                     <div className="mt-2 text-lg font-medium">{item.value}</div>
                   </div>
@@ -251,7 +274,7 @@ export function PortfolioPage({ locale }: { locale: Locale }) {
 
               <div className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
                 {portfolioData.stats.map((stat) => (
-                  <div key={stat.value} className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4">
+                  <div key={stat.label.en} className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4">
                     <div className="text-3xl font-semibold tracking-[-0.05em] text-[var(--accent)]">{stat.value}</div>
                     <div className="mt-2 text-sm text-[var(--text-muted)]">{getText(stat.label, locale)}</div>
                   </div>
@@ -456,8 +479,15 @@ export function PortfolioPage({ locale }: { locale: Locale }) {
           <div className="grid gap-5 md:grid-cols-2">
             {portfolioData.awards.map((award) => (
               <div key={award.title} className={`rounded-[2rem] border border-[var(--border)] bg-[var(--surface)] p-4 ${award.highlight ? "ring-1 ring-[var(--accent)]" : ""}`}>
-                <div className="relative aspect-[4/3] overflow-hidden rounded-[1.25rem] border border-[var(--border)]">
-                  <Image src={award.image} alt={award.badge === "gold" ? "Arduino robot built for the 2021 challenge" : award.title} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
+                <div className={`grid gap-3 ${award.photo ? "grid-cols-2" : ""}`}>
+                  <div className="relative aspect-[4/3] overflow-hidden rounded-[1.25rem] border border-[var(--border)]">
+                    <Image src={award.image} alt={`${award.title}, ${award.event}`} fill sizes={award.photo ? "(max-width: 768px) 50vw, 25vw" : "(max-width: 768px) 100vw, 50vw"} className="object-cover" />
+                  </div>
+                  {award.photo && (
+                    <div className="relative aspect-[4/3] overflow-hidden rounded-[1.25rem] border border-[var(--border)]">
+                      <Image src={award.photo} alt={`Prabu Mahendra, ${award.event}`} fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover object-[center_top]" />
+                    </div>
+                  )}
                 </div>
                 <div className="mt-4 flex items-center justify-between gap-3">
                   <h3 className="text-xl font-semibold tracking-[-0.04em]">{award.title}</h3>
@@ -480,16 +510,15 @@ export function PortfolioPage({ locale }: { locale: Locale }) {
 
         <section className="py-20">
           <div className="rounded-[2rem] border border-[var(--border)] bg-[var(--surface)] p-6 md:p-8">
-            <div className="mb-6 text-[11px] uppercase tracking-[0.2em] text-[var(--text-muted)]">Perjalanan saya</div>
-            <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-              {portfolioData.journey.map((step, index) => (
-                <div key={`${step.label}-${step.title}`} className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface-2)] text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--accent)]">{step.label}</div>
-                  {index !== portfolioData.journey.length - 1 && <div className="hidden h-px w-8 bg-[var(--border)] md:block" />}
-                  <div className="max-w-[150px] text-sm text-[var(--text-muted)]">{step.title}</div>
-                </div>
+            <div className="mb-6 text-[11px] uppercase tracking-[0.2em] text-[var(--text-muted)]">{locale === "id" ? "Perjalanan saya" : "My journey"}</div>
+            <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-7">
+              {portfolioData.journey.map((step) => (
+                <li key={step.label} className="flex items-center gap-3 xl:flex-col xl:items-start">
+                  <div className="flex h-10 w-12 shrink-0 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface-2)] text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--accent)]">{step.label}</div>
+                  <div className="text-sm text-[var(--text-muted)]">{getText(step.title, locale)}</div>
+                </li>
               ))}
-            </div>
+            </ol>
           </div>
         </section>
 
@@ -519,7 +548,7 @@ export function PortfolioPage({ locale }: { locale: Locale }) {
               ))}
             </div>
             <div className="mt-6 flex flex-wrap gap-3 text-sm text-[var(--text-muted)]">
-              <span>Year: {portfolioData.research.year}</span>
+              <span>{locale === "id" ? "Tahun" : "Year"}: {portfolioData.research.year}</span>
             </div>
             <a href={portfolioData.research.paperUrl} target="_blank" rel="noopener noreferrer" className="mt-6 inline-flex rounded-full bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-[#111111]">
               {locale === "id" ? "Baca Paper (PDF)" : "Read Paper (PDF)"}
@@ -538,7 +567,7 @@ export function PortfolioPage({ locale }: { locale: Locale }) {
               <div key={venture.title} className="rounded-[2rem] border border-[var(--border)] bg-[var(--surface)] p-6">
                 {venture.image && (
                   <div className="relative mb-5 aspect-[16/7] overflow-hidden rounded-2xl">
-                    <Image src={venture.image} alt={`${venture.title} logo`} fill sizes="(max-width: 1024px) 100vw, 50vw" className={venture.title === "Fitted Caps" || venture.title === "Niwasa Property Bali" ? "bg-[var(--bg)] object-contain" : "object-cover"} />
+                    <Image src={venture.image} alt={`${venture.title} logo`} fill sizes="(max-width: 1024px) 100vw, 50vw" className={venture.imageFit === "contain" ? "bg-[var(--bg)] object-contain" : "object-cover"} />
                   </div>
                 )}
                 <div className="mb-4 text-[10px] uppercase tracking-[0.2em] text-[var(--text-muted)]">{venture.period}</div>
@@ -577,13 +606,13 @@ export function PortfolioPage({ locale }: { locale: Locale }) {
 
               <div className="mt-8 flex flex-wrap gap-3">
                 <a href={`mailto:${portfolioData.profile.email}`} className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] px-4 py-2 text-sm text-[var(--text)]"><Mail size={16} /> {portfolioData.profile.email}</a>
-                <a href={`https://wa.me/${portfolioData.profile.whatsapp.replace(/\D/g, "")}`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-[#111111]"><MessageSquare size={16} /> WhatsApp</a>
+                <a href={`https://wa.me/${portfolioData.profile.whatsapp.replace(/\D/g, "")}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-[#111111]"><MessageSquare size={16} /> WhatsApp</a>
               </div>
 
               <div className="mt-8 flex flex-wrap gap-3">
-                <a aria-label="GitHub profile" href={portfolioData.profile.github} target="_blank" rel="noreferrer" className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface)] text-[var(--text)]"><GitBranch size={18} /></a>
-                <a aria-label="LinkedIn profile" href={portfolioData.profile.linkedin} target="_blank" rel="noreferrer" className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface)] text-[var(--text)]"><Globe size={18} /></a>
-                <a aria-label="Instagram profile" href={portfolioData.profile.instagram} target="_blank" rel="noreferrer" className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface)] text-[var(--text)]"><Send size={18} /></a>
+                <a aria-label="GitHub profile" href={portfolioData.profile.github} target="_blank" rel="noopener noreferrer" className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface)] text-[var(--text)]"><GitBranch size={18} /></a>
+                <a aria-label="LinkedIn profile" href={portfolioData.profile.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface)] text-[var(--text)]"><Globe size={18} /></a>
+                <a aria-label="Instagram profile" href={portfolioData.profile.instagram} target="_blank" rel="noopener noreferrer" className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface)] text-[var(--text)]"><Send size={18} /></a>
                 <a aria-label={locale === "id" ? "Minta CV melalui email" : "Request CV by email"} href={portfolioData.profile.cv} className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface)] text-[var(--text)]"><Mail size={18} /></a>
               </div>
             </div>

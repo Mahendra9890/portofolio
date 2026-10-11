@@ -5,12 +5,6 @@ export type LocalizedText = {
   en: string;
 };
 
-export type SocialLink = {
-  name: string;
-  href: string;
-  icon: string;
-};
-
 export type PersonalProfile = {
   fullName: string;
   displayName: string;
@@ -55,10 +49,7 @@ export type Skill = {
   label: "Expert" | "Advanced" | "Proficient";
 };
 
-export type SkillGroup = {
-  title: LocalizedText;
-  items: Skill[] | string[];
-};
+export type ProjectCategory = "Web" | "Web App" | "AI/Research" | "Robotics" | "Mobile App / UX Research";
 
 export type ProjectFeature = {
   id: string;
@@ -72,7 +63,7 @@ export type Project = {
   role: LocalizedText;
   team: string;
   year?: number;
-  category: "Web" | "Web App" | "AI/Research" | "Fundamentals" | "Robotics" | "Mobile App / UX Research";
+  category: ProjectCategory;
   stack: string[];
   summary: LocalizedText;
   problem: LocalizedText;
@@ -116,13 +107,15 @@ export type AwardItem = {
   date: string;
   level: string;
   image: string;
+  /** Optional second photo shown next to the certificate. */
+  photo?: string;
   highlight?: boolean;
   badge?: "gold";
 };
 
 export type JourneyStep = {
   label: string;
-  title: string;
+  title: LocalizedText;
 };
 
 export type VentureItem = {
@@ -131,6 +124,8 @@ export type VentureItem = {
   description: LocalizedText;
   metrics: string[];
   image?: string;
+  /** "contain" for logos, "cover" (default) for photos and screenshots. */
+  imageFit?: "cover" | "contain";
   url?: string;
   urlLabel?: LocalizedText;
 };
@@ -168,5 +163,4 @@ export type PortfolioData = {
   journey: JourneyStep[];
   ventures: VentureItem[];
   research: ResearchItem;
-  socials: SocialLink[];
 };

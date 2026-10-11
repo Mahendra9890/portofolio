@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-const metadataBase = new URL(
-  process.env.VERCEL_URL
-    ? `https://${process.env.VERCEL_URL}`
-    : "http://localhost:3000",
-);
+// Production domain first, so link previews never point at a per-deploy preview URL.
+const siteHost = process.env.VERCEL_PROJECT_PRODUCTION_URL ?? process.env.VERCEL_URL;
+const metadataBase = new URL(siteHost ? `https://${siteHost}` : "http://localhost:3000");
+
+// Runs before paint so the saved theme applies without a dark-to-light flash, on every page.
+const themeScript = `try{if(localStorage.getItem("theme")==="light")document.documentElement.dataset.theme="light"}catch(e){}`;
 const profileImageUrl = new URL("/images/profile-web.png", metadataBase).toString();
 
 const geistSans = Geist({
@@ -64,6 +65,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="id" suppressHydrationWarning data-scroll-behavior="smooth" className={`${geistSans.variable} ${geistMono.variable}`}>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body>
         <script
           type="application/ld+json"
@@ -85,7 +89,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
               sameAs: [
                 "https://github.com/Mahendra9890",
                 "https://www.linkedin.com/in/prabumahendra/",
-                "https://www.instagram.com/mahendr4k?utm_source=ig_web_button_share_sheet&obrf=ZDNlZDc0MzIxNw==",
+                "https://www.instagram.com/mahendr4k/",
               ],
             }),
           }}
