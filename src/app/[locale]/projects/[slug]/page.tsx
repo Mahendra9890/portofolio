@@ -81,9 +81,11 @@ async function LocaleProjectDetailContent({
 
       <div className="mt-8 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
         <div>
-          <div className="text-[10px] uppercase tracking-[0.2em] text-[var(--text-muted)]">{project.year} · {project.category}</div>
+          <div className="text-[10px] uppercase tracking-[0.2em] text-[var(--text-muted)]">{project.year ? `${project.year} · ` : ""}{project.category}</div>
           <h1 className="mt-3 text-4xl font-semibold tracking-[-0.06em] sm:text-5xl">{project.title}</h1>
+          {project.context && <p className="mt-3 text-sm font-medium text-[var(--accent)]">{project.context}</p>}
           <p className="mt-4 max-w-2xl text-base leading-8 text-[var(--text-muted)]">{localized(project.summary, currentLocale)}</p>
+          {project.authors && <p className="mt-4 max-w-2xl text-sm leading-7 text-[var(--text-muted)]"><span className="font-semibold text-[var(--text)]">{currentLocale === "id" ? "Penulis: " : "Authors: "}</span>{project.authors}</p>}
         </div>
         <div className="rounded-[2rem] border border-[var(--border)] bg-[var(--surface)] p-6">
           <div className="grid gap-4 text-sm text-[var(--text-muted)]">
@@ -105,6 +107,18 @@ async function LocaleProjectDetailContent({
         </article>
       </section>
 
+      {project.metrics && (
+        <section aria-label={currentLocale === "id" ? "Hasil penelitian" : "Research results"} className="mt-12 grid gap-4 sm:grid-cols-3">
+          {project.metrics.map((metric) => (
+            <article key={metric.label.en} className="rounded-[2rem] border border-[var(--border)] bg-[var(--surface)] p-6">
+              <div className="text-4xl font-semibold tracking-[-0.06em] text-[var(--accent)]">{metric.value}</div>
+              <div className="mt-2 text-xs uppercase tracking-[0.14em] text-[var(--text-muted)]">{localized(metric.label, currentLocale)}</div>
+              {metric.comparison && <p className="mt-2 text-sm text-[var(--text-muted)]">{metric.comparison}</p>}
+            </article>
+          ))}
+        </section>
+      )}
+
       <section className="mt-12 rounded-[2rem] border border-[var(--border)] bg-[var(--surface)] p-6">
         <h2 className="text-2xl font-semibold tracking-[-0.04em]">{currentLocale === "id" ? "Fitur utama" : "Key features"}</h2>
         <div className="mt-6 grid gap-4 md:grid-cols-2">
@@ -122,6 +136,13 @@ async function LocaleProjectDetailContent({
         <p className="mt-3 text-base leading-8 text-[var(--text-muted)]">{localized(project.result, currentLocale)}</p>
       </section>
 
+      {project.businessModel && (
+        <section className="mt-12 rounded-[2rem] border border-[var(--border)] bg-[var(--surface)] p-6">
+          <h2 className="text-2xl font-semibold tracking-[-0.04em]">{currentLocale === "id" ? "Model bisnis & dampak" : "Business model & impact"}</h2>
+          <p className="mt-3 text-base leading-8 text-[var(--text-muted)]">{localized(project.businessModel, currentLocale)}</p>
+        </section>
+      )}
+
       {project.gallery.length > 0 && (
         <section aria-label={currentLocale === "id" ? "Galeri proyek" : "Project gallery"} className="mt-12 grid gap-4 sm:grid-cols-2">
           {project.gallery.map((image, index) => (
@@ -133,6 +154,7 @@ async function LocaleProjectDetailContent({
       )}
 
       <div className="mt-10 flex flex-wrap gap-3">
+        {project.pdfUrl && <a href={project.pdfUrl} target="_blank" rel="noopener noreferrer" className="rounded-full bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-[#111111]">{project.pdfLabel ? localized(project.pdfLabel, currentLocale) : currentLocale === "id" ? "Buka PDF" : "Open PDF"}</a>}
         {project.liveUrl && <a href={project.liveUrl} target="_blank" rel="noreferrer" className="rounded-full bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-[#111111]">{currentLocale === "id" ? "Buka proyek" : "Visit project"}</a>}
         {project.repoUrl && <a href={project.repoUrl} target="_blank" rel="noreferrer" className="rounded-full border border-[var(--border)] px-5 py-3 text-sm font-semibold text-[var(--text)]">GitHub</a>}
         {project.linkedinUrl && <a href={project.linkedinUrl} target="_blank" rel="noreferrer" className="rounded-full border border-[var(--border)] px-5 py-3 text-sm font-semibold text-[var(--text)]">LinkedIn</a>}

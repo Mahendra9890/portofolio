@@ -40,6 +40,13 @@ export function PortfolioPage({ locale }: { locale: Locale }) {
   const [theme, setTheme] = useState<"dark" | "light">("dark");
   const [mounted, setMounted] = useState(false);
   const [currentYear, setCurrentYear] = useState(2026);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const projectCategories = ["Web", "Web App", "AI/Research", "Robotics", "Mobile App / UX Research"].filter((category) =>
+    portfolioData.projects.some((project) => project.category === category),
+  );
+  const visibleProjects = portfolioData.projects.filter(
+    (project) => !selectedCategory || project.category === selectedCategory,
+  );
 
   useEffect(() => {
     document.documentElement.lang = locale;
@@ -148,11 +155,12 @@ export function PortfolioPage({ locale }: { locale: Locale }) {
 
               <div className="mt-8 flex flex-wrap gap-4">
                 <a
-                  href={portfolioData.profile.cv}
+                  href="/docs/cv-prabu-mahendra.pdf"
                   className="inline-flex items-center gap-2 rounded-full bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-[#111111] transition-transform hover:scale-[1.02]"
                 >
+                  {/* TODO: upload CV */}
                   <Mail size={16} />
-                  {locale === "id" ? "Minta CV" : "Request CV"}
+                  {locale === "id" ? "Download CV" : "Download CV"}
                 </a>
                 <a
                   href="#projects"
@@ -298,8 +306,19 @@ export function PortfolioPage({ locale }: { locale: Locale }) {
             <div className="text-[10px] uppercase tracking-[0.2em] text-[var(--text-muted)]">{locale === "id" ? "Proyek pilihan" : "Selected work"}</div>
           </div>
 
+          <div aria-label={locale === "id" ? "Filter kategori proyek" : "Project category filter"} className="mb-6 flex flex-wrap gap-2">
+            <button type="button" aria-pressed={selectedCategory === null} onClick={() => setSelectedCategory(null)} className={`rounded-full border px-3 py-2 text-[10px] uppercase tracking-[0.14em] ${selectedCategory === null ? "border-[var(--accent)] bg-[var(--accent)] text-[#111111]" : "border-[var(--border)] text-[var(--text-muted)]"}`}>
+              {locale === "id" ? "Semua proyek" : "All projects"}
+            </button>
+            {projectCategories.map((category) => (
+              <button key={category} type="button" aria-pressed={selectedCategory === category} onClick={() => setSelectedCategory(category)} className={`rounded-full border px-3 py-2 text-[10px] uppercase tracking-[0.14em] ${selectedCategory === category ? "border-[var(--accent)] bg-[var(--accent)] text-[#111111]" : "border-[var(--border)] text-[var(--text-muted)]"}`}>
+                {category}
+              </button>
+            ))}
+          </div>
+
           <div className="grid gap-5 lg:grid-cols-2">
-            {portfolioData.projects.filter((project) => project.featured).map((project) => (
+            {visibleProjects.filter((project) => project.featured).map((project) => (
               <Link key={project.slug} href={`/${locale}/projects/${project.slug}`} className="group overflow-hidden rounded-[2rem] border border-[var(--border)] bg-[var(--surface)] p-3 lg:col-span-2">
                 <div className="relative overflow-hidden rounded-[1.5rem] border border-[var(--border)]">
                   <div className="relative aspect-[16/10] overflow-hidden">
@@ -308,7 +327,7 @@ export function PortfolioPage({ locale }: { locale: Locale }) {
                 </div>
                 <div className="mt-5 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
                   <div>
-                    <div className="text-[10px] uppercase tracking-[0.2em] text-[var(--text-muted)]">{project.year} · {project.category}</div>
+                    <div className="text-[10px] uppercase tracking-[0.2em] text-[var(--text-muted)]">{project.year ? `${project.year} · ` : ""}{project.category}</div>
                     <h3 className="mt-2 text-3xl font-semibold tracking-[-0.05em]">{project.title}</h3>
                   </div>
                   <div className="text-[10px] uppercase tracking-[0.2em] text-[var(--text-muted)]">{getText(project.role, locale)}</div>
@@ -324,7 +343,7 @@ export function PortfolioPage({ locale }: { locale: Locale }) {
           </div>
 
           <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-            {portfolioData.projects.filter((project) => !project.featured).map((project) => (
+            {visibleProjects.filter((project) => !project.featured).map((project) => (
               <Link key={project.slug} href={`/${locale}/projects/${project.slug}`} className="group overflow-hidden rounded-[2rem] border border-[var(--border)] bg-[var(--surface)] p-3">
                 <div className="relative overflow-hidden rounded-[1.5rem] border border-[var(--border)]">
                   <div className="relative aspect-[16/10] overflow-hidden">
@@ -332,7 +351,7 @@ export function PortfolioPage({ locale }: { locale: Locale }) {
                   </div>
                 </div>
                 <div className="mt-4 flex items-center justify-between text-[10px] uppercase tracking-[0.18em] text-[var(--text-muted)]">
-                  <span>{project.year}</span>
+                  <span>{project.year ?? (locale === "id" ? "Proyek kuliah" : "Course project")}</span>
                   <span>{project.category}</span>
                 </div>
                 <h3 className="mt-3 text-2xl font-semibold tracking-[-0.04em]">{project.title}</h3>
@@ -489,10 +508,22 @@ export function PortfolioPage({ locale }: { locale: Locale }) {
               <div className="rounded-full border border-[var(--border)] px-3 py-2 text-[10px] uppercase tracking-[0.2em] text-[var(--text-muted)]">{portfolioData.research.status}</div>
             </div>
             <p className="mt-5 max-w-3xl text-base leading-8 text-[var(--text-muted)]">{getText(portfolioData.research.summary, locale)}</p>
+            <p className="mt-3 max-w-3xl text-sm leading-7 text-[var(--text-muted)]">{portfolioData.research.authors}</p>
+            <div className="mt-6 grid gap-4 sm:grid-cols-3">
+              {portfolioData.research.metrics.map((metric) => (
+                <div key={metric.label.en} className="rounded-2xl border border-[var(--border)] bg-[var(--bg)] p-5">
+                  <div className="text-3xl font-semibold tracking-[-0.05em] text-[var(--accent)]">{metric.value}</div>
+                  <div className="mt-2 text-xs uppercase tracking-[0.14em] text-[var(--text-muted)]">{getText(metric.label, locale)}</div>
+                  {metric.comparison && <div className="mt-2 text-xs text-[var(--text-muted)]">{metric.comparison}</div>}
+                </div>
+              ))}
+            </div>
             <div className="mt-6 flex flex-wrap gap-3 text-sm text-[var(--text-muted)]">
               <span>Year: {portfolioData.research.year}</span>
-              <span>DOI: {portfolioData.research.doi}</span>
             </div>
+            <a href={portfolioData.research.paperUrl} target="_blank" rel="noopener noreferrer" className="mt-6 inline-flex rounded-full bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-[#111111]">
+              {locale === "id" ? "Baca Paper (PDF)" : "Read Paper (PDF)"}
+            </a>
           </div>
         </section>
 

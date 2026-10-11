@@ -69,10 +69,10 @@ export type ProjectFeature = {
 export type Project = {
   slug: string;
   title: string;
-  year: number;
   role: LocalizedText;
   team: string;
-  category: "Web" | "Web App" | "AI/Research" | "Fundamentals" | "Robotics";
+  year?: number;
+  category: "Web" | "Web App" | "AI/Research" | "Fundamentals" | "Robotics" | "Mobile App / UX Research";
   stack: string[];
   summary: LocalizedText;
   problem: LocalizedText;
@@ -88,6 +88,16 @@ export type Project = {
   linkedinUrl?: string;
   featured?: boolean;
   highlight?: boolean;
+  context?: string;
+  authors?: string;
+  businessModel?: LocalizedText;
+  pdfUrl?: string;
+  pdfLabel?: LocalizedText;
+  metrics?: Array<{
+    label: LocalizedText;
+    value: string;
+    comparison?: string;
+  }>;
 };
 
 export type ExperienceItem = {
@@ -128,8 +138,14 @@ export type ResearchItem = {
   venue: string;
   year: number;
   status: string;
-  doi: string;
+  authors: string;
+  paperUrl: string;
   summary: LocalizedText;
+  metrics: Array<{
+    label: LocalizedText;
+    value: string;
+    comparison?: string;
+  }>;
 };
 
 export type PortfolioData = {
