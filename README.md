@@ -2,35 +2,56 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
-First, run the development server:
+# Prabu Mahendra — Portfolio
+
+Personal portfolio for internship applications, built with Next.js, TypeScript, Tailwind CSS, and Framer Motion.
+
+## English
+
+### Run locally
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000`. Indonesian is available at `/` and `/id`; English is at `/en`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Checks
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run lint
+npm run build
+```
 
-## Learn More
+### Content and deployment
 
-To learn more about Next.js, take a look at the following resources:
+- Portfolio content is centralized in `src/data/portfolio.ts`; shared types are in `src/types/portfolio.ts`.
+- Images and static assets are in `public/`.
+- Deploy on Vercel by importing the GitHub repository or using the Vercel CLI after signing in.
+- The CV action currently opens an email request because a verified CV file has not been provided. Replace `profile.cv` and add the approved PDF under `public/` to enable direct download.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Bahasa Indonesia
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Menjalankan secara lokal
 
-## Deploy on Vercel
+```bash
+npm install
+npm run dev
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Buka `http://localhost:3000`. Bahasa Indonesia tersedia di `/` dan `/id`; bahasa Inggris di `/en`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Pemeriksaan
+
+```bash
+npm run lint
+npm run build
+```
+
+### Konten dan deployment
+
+- Konten portofolio terpusat di `src/data/portfolio.ts`; tipe data bersama ada di `src/types/portfolio.ts`.
+- Gambar dan aset statis berada di `public/`.
+- Deploy ke Vercel dengan mengimpor repositori GitHub atau memakai Vercel CLI setelah login.
+- Tombol CV saat ini membuka email permintaan karena file CV final belum tersedia. Ganti `profile.cv` dan tambahkan PDF yang sudah disetujui ke `public/` untuk mengaktifkan unduhan langsung.
