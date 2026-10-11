@@ -131,6 +131,7 @@ export type VentureItem = {
   description: LocalizedText;
   metrics: string[];
   image?: string;
+  url?: string;
 };
 
 export type ResearchItem = {

@@ -538,7 +538,7 @@ export function PortfolioPage({ locale }: { locale: Locale }) {
               <div key={venture.title} className="rounded-[2rem] border border-[var(--border)] bg-[var(--surface)] p-6">
                 {venture.image && (
                   <div className="relative mb-5 aspect-[16/7] overflow-hidden rounded-2xl">
-                    <Image src={venture.image} alt={`${venture.title} website project cover`} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
+                    <Image src={venture.image} alt={`${venture.title} logo`} fill sizes="(max-width: 1024px) 100vw, 50vw" className={venture.title === "Fitted Caps" || venture.title === "Niwasa Property Bali" ? "bg-[var(--bg)] object-contain" : "object-cover"} />
                   </div>
                 )}
                 <div className="mb-4 text-[10px] uppercase tracking-[0.2em] text-[var(--text-muted)]">{venture.period}</div>
@@ -549,6 +549,11 @@ export function PortfolioPage({ locale }: { locale: Locale }) {
                     <span key={metric} className="rounded-full border border-[var(--border)] px-2.5 py-1 text-[10px] uppercase tracking-[0.14em] text-[var(--text-muted)]">{metric}</span>
                   ))}
                 </div>
+                {venture.url && (
+                  <a href={venture.url} target="_blank" rel="noopener noreferrer" className="mt-5 inline-flex rounded-full border border-[var(--border)] px-4 py-2 text-xs font-medium text-[var(--text)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]">
+                    {locale === "id" ? "Kunjungi Instagram" : "Visit Instagram"}
+                  </a>
+                )}
               </div>
             ))}
           </div>

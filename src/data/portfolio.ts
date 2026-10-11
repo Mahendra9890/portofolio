@@ -40,8 +40,8 @@ export const portfolioData: PortfolioData = {
       { id: "Self-starter", en: "Self-starter" },
     ],
     tagline: {
-      id: "Saya membangun antarmuka web yang cepat, rapi, dan enak dipakai.",
-      en: "I build web interfaces that are fast, clean, and easy to use.",
+      id: "Code by day, connect by night—building solutions and relationships one line and laugh at a time.",
+      en: "Code by day, connect by night—building solutions and relationships one line and laugh at a time.",
     },
     shortBio: {
       id: "Saya Prabu, mahasiswa Computer Science BINUS peminatan Software Engineering dari Bali. Saya fokus di frontend development dan UI/UX. Saya sedang mencari magang 1 tahun sebagai Software Engineer atau Frontend Engineer.",
@@ -434,6 +434,18 @@ export const portfolioData: PortfolioData = {
         en: "Conducted area research, property market analysis, and early digital marketing strategy.",
       },
       metrics: ["Zonasi area", "Market research", "Branding"],
+      image: "/images/niwasa.jpg",
+    },
+    {
+      title: "Fitted Caps",
+      period: "Usaha mandiri · Independent venture",
+      description: {
+        id: "Menjalankan usaha Fitted Caps dan membangun koneksi dengan pelanggan melalui Instagram.",
+        en: "Running Fitted Caps and connecting with customers through Instagram.",
+      },
+      metrics: ["Fitted caps", "Instagram business"],
+      image: "/images/fitted-caps.jpg",
+      url: "https://www.instagram.com/fitted_caps__?xtok=MWsyaGp2cmJzZ3E5aw%3D%3D&utm_source=qr",
     },
   ],
   research: {
