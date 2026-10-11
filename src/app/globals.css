@@ -1,34 +1,34 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #0c0b09;
-  --surface: #161410;
-  --surface-2: #1f1c16;
-  --border: #2e2a22;
-  --text: #f4efe6;
-  --text-muted: #a89f8f;
-  --accent: #d4a24a;
+  --bg: #0a0a0b;
+  --surface: #121214;
+  --surface-2: #1a1a1d;
+  --border: #27272a;
+  --text: #f5f5f4;
+  --text-muted: #a1a1aa;
+  --accent: #e8b04b;
   --accent-2: #3ddc97;
-  --accent-glow: rgba(212, 162, 74, 0.12);
+  --accent-glow: rgba(232, 176, 75, 0.15);
 }
 
 :root[data-theme="light"] {
-  --bg: #f7f3ea;
-  --surface: #fffdf8;
-  --surface-2: #efe9dc;
-  --border: #ddd4c3;
-  --text: #1a1712;
-  --text-muted: #6b6356;
-  --accent: #9a6b18;
-  --accent-2: #0f8f5f;
-  --accent-glow: rgba(154, 107, 24, 0.1);
+  --bg: #fafaf7;
+  --surface: #ffffff;
+  --surface-2: #f4f4f1;
+  --border: #e7e5e4;
+  --text: #111111;
+  --text-muted: #57534e;
+  --accent: #b7801f;
+  --accent-2: #12a16b;
+  --accent-glow: rgba(183, 128, 31, 0.12);
 }
 
 @theme inline {
   --color-background: var(--bg);
   --color-foreground: var(--text);
-  --font-sans: var(--font-body);
-  --font-display: var(--font-display);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
 }
 
 html {
@@ -38,12 +38,9 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
-  background:
-    radial-gradient(ellipse 80% 50% at 10% -10%, var(--accent-glow), transparent 55%),
-    radial-gradient(ellipse 60% 40% at 100% 0%, rgba(61, 220, 151, 0.04), transparent 50%),
-    var(--bg);
+  background: var(--bg);
   color: var(--text);
-  font-family: var(--font-body), "Segoe UI", sans-serif;
+  font-family: var(--font-geist-sans), Arial, sans-serif;
   line-height: 1.6;
 }
 
@@ -58,39 +55,6 @@ a {
 img {
   display: block;
   max-width: 100%;
-}
-
-.font-display {
-  font-family: var(--font-display), Georgia, serif;
-}
-
-.section-mark {
-  position: relative;
-  display: inline-flex;
-  align-items: baseline;
-  gap: 0.85rem;
-  margin-bottom: 2.5rem;
-  padding-left: 0.15rem;
-}
-
-.section-mark::before {
-  content: "";
-  width: 0.55rem;
-  height: 0.55rem;
-  margin-top: 0.35em;
-  flex-shrink: 0;
-  background: var(--accent);
-  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-}
-
-.section-mark-title {
-  font-family: var(--font-display), Georgia, serif;
-  font-size: clamp(1.75rem, 3vw, 2.35rem);
-  font-style: italic;
-  font-weight: 400;
-  letter-spacing: -0.03em;
-  line-height: 1.15;
-  color: var(--text);
 }
 
 .marquee-track {
