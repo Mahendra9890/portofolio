@@ -313,7 +313,7 @@ export function PortfolioPage({ locale }: { locale: Locale }) {
             {portfolioData.projects.filter((project) => !project.featured).map((project) => (
               <Link key={project.slug} href={`/${locale}/projects/${project.slug}`} className="group overflow-hidden rounded-[2rem] border border-[var(--border)] bg-[var(--surface)] p-3">
                 <div className="relative overflow-hidden rounded-[1.5rem] border border-[var(--border)]">
-                  <div className="relative aspect-[4/3] overflow-hidden">
+                  <div className="relative aspect-[16/10] overflow-hidden">
                     <Image src={project.coverImage} alt={project.title} fill sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw" className="object-cover transition-transform duration-500 group-hover:scale-105" />
                   </div>
                 </div>
