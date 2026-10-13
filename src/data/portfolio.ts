@@ -121,7 +121,8 @@ export const portfolioData: PortfolioData = {
       ],
       coverImage: "/images/stairslife-team.jpg",
       gallery: ["/images/stairslife-booth.jpg", "/images/stairslife-poster.jpg"],
-      liveUrl: "https://stairslife.com",
+      liveUrl: "https://www.stairslife.com/",
+      linkedinUrl: "https://lnkd.in/gWMuxQCf",
       repoUrl: "https://github.com/Mahendra9890/stairslife",
       featured: true,
       highlight: true,
@@ -323,6 +324,7 @@ export const portfolioData: PortfolioData = {
       tags: ["UI/UX", "Frontend", "Team Project"],
       links: [
         { label: { id: "Kunjungi Website", en: "Visit Website" }, url: "https://www.stairslife.com/" },
+        { label: { id: "Lihat di LinkedIn", en: "View on LinkedIn" }, url: "https://lnkd.in/gWMuxQCf" },
       ],
     },
     {
@@ -335,11 +337,14 @@ export const portfolioData: PortfolioData = {
       },
       tags: ["Community Service", "Teamwork"],
       image: "/images/kmh-binus.jpg",
+      links: [
+        { label: { id: "Lihat Kegiatan", en: "View Event" }, url: "https://student-activity.binus.ac.id/kmh/gallery/pengabdian-kepada-masyarakat-mahasiswa-hindu-binus/" },
+      ],
     },
     {
       role: { id: "Founder & Online Channel Manager", en: "Founder & Online Channel Manager" },
       organization: "Pica Chocolate Bali",
-      period: "2023 sampai sekarang",
+      period: "2025 sampai sekarang",
       summary: {
         id: "Membangun website brand, mengelola tiga marketplace, dan menyusun SOP fulfillment serta pricing.",
         en: "Built the brand website, managed three marketplaces, and set pricing and fulfillment SOPs.",
@@ -354,7 +359,7 @@ export const portfolioData: PortfolioData = {
     {
       role: { id: "Founder", en: "Founder" },
       organization: "Niwasa Property Bali",
-      period: "2022 - 2025",
+      period: "2026 sampai sekarang",
       summary: {
         id: "Melakukan riset zonasi lahan dan strategi pemasaran untuk properti di Badung dan Gianyar.",
         en: "Researched zoning and handled property marketing for areas in Badung and Gianyar.",
@@ -439,7 +444,7 @@ export const portfolioData: PortfolioData = {
   ventures: [
     {
       title: "Pica Chocolate Bali",
-      period: "2023 sampai sekarang",
+      period: "2025 sampai sekarang",
       description: {
         id: "Mengelola website brand, penjualan di marketplace, dan SOP operasional dari produk hingga pengiriman.",
         en: "Managed the brand website, marketplace sales, and operational SOPs from product to delivery.",
@@ -454,7 +459,7 @@ export const portfolioData: PortfolioData = {
     },
     {
       title: "Niwasa Property Bali",
-      period: "2022 - 2025",
+      period: "2026 sampai sekarang",
       description: {
         id: "Melakukan riset area, analisis potensi pasar properti, dan strategi pemasaran digital awal.",
         en: "Conducted area research, property market analysis, and early digital marketing strategy.",

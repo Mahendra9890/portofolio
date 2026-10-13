@@ -66,26 +66,35 @@ async function LocaleProjectDetailContent({
   }
 
   return (
-    <main className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
-      <div className="mb-6 text-[10px] uppercase tracking-[0.2em] text-[var(--text-muted)]">
-        <Link href={`/${currentLocale}`} className="hover:text-[var(--text)]">{currentLocale === "id" ? "Beranda" : "Home"}</Link>
-        <span className="mx-2">/</span>
-        <span>{project.title}</span>
-      </div>
+    <main className="mx-auto max-w-6xl px-4 pb-[calc(4rem+env(safe-area-inset-bottom))] pt-8 sm:px-6 sm:pt-16 lg:px-8">
+      <nav aria-label="Breadcrumb" className="mb-6 flex min-w-0 items-center text-[11px] uppercase tracking-[0.2em] text-[var(--text-muted)]">
+        <Link href={`/${currentLocale}#projects`} className="inline-flex min-h-11 shrink-0 items-center gap-2 rounded-full border border-[var(--border)] px-4 hover:text-[var(--text)]">
+          <span aria-hidden="true">←</span>
+          {currentLocale === "id" ? "Kembali" : "Back"}
+        </Link>
+        <span className="mx-3 hidden sm:inline">/</span>
+        <span className="hidden truncate sm:inline">{project.title}</span>
+      </nav>
 
-      <div className="overflow-hidden rounded-[2rem] border border-[var(--border)] bg-[var(--surface)] p-4">
-        <div className="relative aspect-[16/10] overflow-hidden rounded-[1.5rem] border border-[var(--border)]">
+      <div className="overflow-hidden rounded-[1.5rem] border border-[var(--border)] bg-[var(--surface)] p-2 sm:rounded-[2rem] sm:p-4">
+        <div className="relative aspect-[4/3] sm:aspect-[16/10] overflow-hidden rounded-[1.5rem] border border-[var(--border)]">
           <Image src={project.coverImage} alt={project.title} fill sizes="(max-width: 768px) 100vw, 90vw" className="object-cover" />
         </div>
       </div>
 
       <div className="mt-8 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
         <div>
-          <div className="text-[10px] uppercase tracking-[0.2em] text-[var(--text-muted)]">{project.year ? `${project.year} · ` : ""}{project.category}</div>
-          <h1 className="mt-3 text-4xl font-semibold tracking-[-0.06em] sm:text-5xl">{project.title}</h1>
+          <div className="text-[11px] uppercase tracking-[0.2em] text-[var(--text-muted)]">{project.year ? `${project.year} · ` : ""}{project.category}</div>
+          <h1 className="mt-3 break-words text-3xl font-semibold tracking-[-0.05em] sm:text-5xl">{project.title}</h1>
           {project.context && <p className="mt-3 text-sm font-medium text-[var(--accent)]">{project.context}</p>}
           <p className="mt-4 max-w-2xl text-base leading-8 text-[var(--text-muted)]">{localized(project.summary, currentLocale)}</p>
           {project.authors && <p className="mt-4 max-w-2xl text-sm leading-7 text-[var(--text-muted)]"><span className="font-semibold text-[var(--text)]">{currentLocale === "id" ? "Penulis: " : "Authors: "}</span>{project.authors}</p>}
+          <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            {project.pdfUrl && <a href={project.pdfUrl} target="_blank" rel="noopener noreferrer" className="flex min-h-11 w-full items-center justify-center rounded-full bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-[#111111] sm:w-auto">{project.pdfLabel ? localized(project.pdfLabel, currentLocale) : currentLocale === "id" ? "Buka PDF" : "Open PDF"}</a>}
+            {project.liveUrl && <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="flex min-h-11 w-full items-center justify-center rounded-full bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-[#111111] sm:w-auto">{currentLocale === "id" ? "Buka proyek" : "Visit project"}</a>}
+            {project.repoUrl && <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" className="flex min-h-11 w-full items-center justify-center rounded-full border border-[var(--border)] px-5 py-3 text-sm font-semibold text-[var(--text)] sm:w-auto">GitHub</a>}
+            {project.linkedinUrl && <a href={project.linkedinUrl} target="_blank" rel="noopener noreferrer" className="flex min-h-11 w-full items-center justify-center rounded-full border border-[var(--border)] px-5 py-3 text-sm font-semibold text-[var(--text)] sm:w-auto">{currentLocale === "id" ? "Lihat di LinkedIn" : "View on LinkedIn"}</a>}
+          </div>
         </div>
         <div className="rounded-[2rem] border border-[var(--border)] bg-[var(--surface)] p-6">
           <div className="grid gap-4 text-sm text-[var(--text-muted)]">
@@ -153,12 +162,6 @@ async function LocaleProjectDetailContent({
         </section>
       )}
 
-      <div className="mt-10 flex flex-wrap gap-3">
-        {project.pdfUrl && <a href={project.pdfUrl} target="_blank" rel="noopener noreferrer" className="rounded-full bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-[#111111]">{project.pdfLabel ? localized(project.pdfLabel, currentLocale) : currentLocale === "id" ? "Buka PDF" : "Open PDF"}</a>}
-        {project.liveUrl && <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="rounded-full bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-[#111111]">{currentLocale === "id" ? "Buka proyek" : "Visit project"}</a>}
-        {project.repoUrl && <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" className="rounded-full border border-[var(--border)] px-5 py-3 text-sm font-semibold text-[var(--text)]">GitHub</a>}
-        {project.linkedinUrl && <a href={project.linkedinUrl} target="_blank" rel="noopener noreferrer" className="rounded-full border border-[var(--border)] px-5 py-3 text-sm font-semibold text-[var(--text)]">LinkedIn</a>}
-      </div>
     </main>
   );
 }
