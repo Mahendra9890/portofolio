@@ -60,19 +60,30 @@ export const portfolioData: PortfolioData = {
     { value: "5", label: { id: "Penghargaan kompetisi", en: "Competition awards" } },
     { value: "3", label: { id: "Marketplace dikelola", en: "Marketplaces managed" } },
   ],
-  education: {
-    institution: "Universitas Bina Nusantara (BINUS University)",
-    program: "Computer Science, peminatan Software Engineering",
-    period: "2024 sampai sekarang",
-    cohort: "B28",
-    relevantCourses: [
-      "Data Structures (AVL Tree, Red-Black Tree, Heap, Graph, Trie, B-Tree, Hashing)",
-      "Database Technology (SQL, normalization, transactions)",
-      "Code Re-Engineering (OOP, design smells, refactoring)",
-      "Mobile Hybrid Solution (Flutter)",
-      "Bioinformatics",
-    ],
-  },
+  education: [
+    {
+      institution: "Universitas Bina Nusantara (BINUS University)",
+      program: { id: "Computer Science, peminatan Software Engineering", en: "Computer Science, Software Engineering track" },
+      period: "2024 sampai sekarang",
+      location: "Jakarta",
+      cohort: "B28",
+      relevantCourses: [
+        "Data Structures",
+        "Database Technology",
+        "Code Re-Engineering",
+        "Mobile Hybrid Solution (Flutter)",
+        "Bioinformatics",
+      ],
+      url: "https://binus.ac.id/",
+    },
+    {
+      institution: "SMA Negeri 3 Denpasar",
+      program: { id: "Sekolah Menengah Atas", en: "Senior High School" },
+      period: "2021 - 2024",
+      location: "Denpasar, Bali",
+      url: "https://www.smanegeri3denpasar.sch.id/",
+    },
+  ],
   skills: {
     core: [
       { name: "HTML", level: 5, label: "Expert" },
@@ -123,6 +134,7 @@ export const portfolioData: PortfolioData = {
       gallery: ["/images/stairslife-booth.jpg", "/images/stairslife-poster.jpg"],
       liveUrl: "https://www.stairslife.com/",
       linkedinUrl: "https://lnkd.in/gWMuxQCf",
+      instagramUrl: "https://www.instagram.com/p/Ddp9RD-E0IN/",
       repoUrl: "https://github.com/Mahendra9890/stairslife",
       featured: true,
       highlight: true,
@@ -325,6 +337,7 @@ export const portfolioData: PortfolioData = {
       links: [
         { label: { id: "Kunjungi Website", en: "Visit Website" }, url: "https://www.stairslife.com/" },
         { label: { id: "Lihat di LinkedIn", en: "View on LinkedIn" }, url: "https://lnkd.in/gWMuxQCf" },
+        { label: { id: "Lihat di Instagram", en: "View on Instagram" }, url: "https://www.instagram.com/p/Ddp9RD-E0IN/" },
       ],
     },
     {

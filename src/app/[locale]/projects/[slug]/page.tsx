@@ -94,6 +94,7 @@ async function LocaleProjectDetailContent({
             {project.liveUrl && <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="flex min-h-11 w-full items-center justify-center rounded-full bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-[#111111] sm:w-auto">{currentLocale === "id" ? "Buka proyek" : "Visit project"}</a>}
             {project.repoUrl && <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" className="flex min-h-11 w-full items-center justify-center rounded-full border border-[var(--border)] px-5 py-3 text-sm font-semibold text-[var(--text)] sm:w-auto">GitHub</a>}
             {project.linkedinUrl && <a href={project.linkedinUrl} target="_blank" rel="noopener noreferrer" className="flex min-h-11 w-full items-center justify-center rounded-full border border-[var(--border)] px-5 py-3 text-sm font-semibold text-[var(--text)] sm:w-auto">{currentLocale === "id" ? "Lihat di LinkedIn" : "View on LinkedIn"}</a>}
+            {project.instagramUrl && <a href={project.instagramUrl} target="_blank" rel="noopener noreferrer" className="flex min-h-11 w-full items-center justify-center rounded-full border border-[var(--border)] px-5 py-3 text-sm font-semibold text-[var(--text)] sm:w-auto">{currentLocale === "id" ? "Lihat di Instagram" : "View on Instagram"}</a>}
           </div>
         </div>
         <div className="rounded-[2rem] border border-[var(--border)] bg-[var(--surface)] p-6">

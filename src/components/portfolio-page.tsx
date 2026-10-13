@@ -617,6 +617,41 @@ export function PortfolioPage({ locale }: { locale: Locale }) {
           </div>
         </section>
 
+        <section id="education" className="scroll-mt-20 py-14 sm:py-20">
+          <div className="mb-10 flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--text-muted)]">
+            <span className="text-[var(--accent)]">{"// education"}</span>
+            <span className="inline-block h-px w-14 bg-[var(--border)]" />
+            <span>{locale === "id" ? "Pendidikan" : "Education"}</span>
+          </div>
+
+          <div className="grid gap-5 md:grid-cols-2">
+            {portfolioData.education.map((school) => (
+              <article key={school.institution} className="flex flex-col rounded-[1.5rem] border border-[var(--border)] bg-[var(--surface)] p-5 sm:rounded-[2rem] sm:p-6">
+                <div className="text-[11px] uppercase tracking-[0.2em] text-[var(--text-muted)]">{school.period}</div>
+                <h3 className="mt-2 text-2xl font-semibold tracking-[-0.04em]">{school.institution}</h3>
+                <div className="mt-2 text-base font-medium text-[var(--accent)]">{getText(school.program, locale)}</div>
+                <p className="mt-2 text-sm text-[var(--text-muted)]">
+                  {school.location}
+                  {school.cohort ? ` · ${locale === "id" ? "Angkatan" : "Cohort"} ${school.cohort}` : ""}
+                </p>
+                {school.relevantCourses && (
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {school.relevantCourses.map((course) => (
+                      <span key={course} className="rounded-full border border-[var(--border)] px-2.5 py-1 text-[11px] uppercase tracking-[0.14em] text-[var(--text-muted)]">{course}</span>
+                    ))}
+                  </div>
+                )}
+                <div className="mt-5 flex flex-wrap gap-2 pt-1 md:mt-auto md:pt-5">
+                  <a href={school.url} target="_blank" rel="noopener noreferrer" className={linkButtonClass}>
+                    {locale === "id" ? "Kunjungi Website" : "Visit Website"}
+                    <ArrowRight size={12} />
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
         <section id="experience" className="scroll-mt-20 py-14 sm:py-20">
           <div className="mb-10 flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--text-muted)]">
             <span className="text-[var(--accent)]">{"// experience"}</span>

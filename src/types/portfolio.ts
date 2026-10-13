@@ -37,10 +37,12 @@ export type StatItem = {
 
 export type EducationItem = {
   institution: string;
-  program: string;
+  program: LocalizedText;
   period: string;
-  cohort: string;
-  relevantCourses: string[];
+  location: string;
+  cohort?: string;
+  relevantCourses?: string[];
+  url: string;
 };
 
 export type Skill = {
@@ -77,6 +79,7 @@ export type Project = {
   liveUrl?: string;
   repoUrl?: string;
   linkedinUrl?: string;
+  instagramUrl?: string;
   featured?: boolean;
   highlight?: boolean;
   context?: string;
@@ -155,7 +158,7 @@ export type ResearchItem = {
 export type PortfolioData = {
   profile: PersonalProfile;
   stats: StatItem[];
-  education: EducationItem;
+  education: EducationItem[];
   skills: {
     core: Skill[];
     frontend: string[];
