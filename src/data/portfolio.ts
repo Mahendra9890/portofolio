@@ -29,7 +29,7 @@ export const portfolioData: PortfolioData = {
     github: "https://github.com/Mahendra9890",
     linkedin: "https://www.linkedin.com/in/prabumahendra/",
     instagram: instagramUrl,
-    cv: "mailto:prabumahendra255@gmail.com?subject=Request%20for%20Prabu%20Mahendra%20CV",
+    cv: "/docs/CV-Prabu-Mahendra.pdf",
     headline: {
       id: "Mahasiswa Computer Science BINUS · Software Engineering · Frontend Developer",
       en: "Computer Science Student at BINUS · Software Engineering · Frontend Developer",

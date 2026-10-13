@@ -291,6 +291,17 @@ export function PortfolioPage({ locale }: { locale: Locale }) {
             {locale === "id" ? "Hubungi Saya" : "Hire Me"}
           </a>
 
+          <a
+            href={portfolioData.profile.cv}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => setMenuOpen(false)}
+            className="mt-3 flex min-h-12 items-center justify-center gap-2 rounded-full border border-[var(--border)] px-5 text-sm font-semibold text-[var(--text)]"
+          >
+            <FileText size={16} />
+            {locale === "id" ? "Lihat CV" : "View CV"}
+          </a>
+
           <div className="mt-4 grid grid-cols-2 gap-3">
             <Link
               href={locale === "id" ? "/en" : "/id"}
@@ -361,10 +372,12 @@ export function PortfolioPage({ locale }: { locale: Locale }) {
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
                 <a
                   href={portfolioData.profile.cv}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-[#111111] transition-transform hover:scale-[1.02]"
                 >
                   <FileText size={16} />
-                  {locale === "id" ? "Minta CV" : "Request CV"}
+                  {locale === "id" ? "Lihat CV" : "View CV"}
                 </a>
                 <a
                   href="#projects"
@@ -850,13 +863,14 @@ export function PortfolioPage({ locale }: { locale: Locale }) {
               <div className="mt-8 flex flex-wrap gap-3">
                 <a href={`mailto:${portfolioData.profile.email}`} className="inline-flex min-h-11 max-w-full items-center gap-2 break-all rounded-full border border-[var(--border)] px-4 py-2 text-sm text-[var(--text)]"><Mail size={16} className="shrink-0" /> {portfolioData.profile.email}</a>
                 <a href={`https://wa.me/${portfolioData.profile.whatsapp.replace(/\D/g, "")}`} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-2 rounded-full bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-[#111111]"><MessageSquare size={16} /> WhatsApp</a>
+                <a href={portfolioData.profile.cv} download="CV-Prabu-Mahendra.pdf" className="inline-flex min-h-11 items-center gap-2 rounded-full border border-[var(--border)] px-4 py-2 text-sm font-medium text-[var(--text)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"><FileText size={16} /> {locale === "id" ? "Unduh CV (PDF)" : "Download CV (PDF)"}</a>
               </div>
 
               <div className="mt-8 flex flex-wrap gap-3">
                 <a aria-label="GitHub profile" href={portfolioData.profile.github} target="_blank" rel="noopener noreferrer" className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface)] text-[var(--text)]"><GitHubIcon /></a>
                 <a aria-label="LinkedIn profile" href={portfolioData.profile.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface)] text-[var(--text)]"><LinkedInIcon /></a>
                 <a aria-label="Instagram profile" href={portfolioData.profile.instagram} target="_blank" rel="noopener noreferrer" className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface)] text-[var(--text)]"><InstagramIcon /></a>
-                <a aria-label={locale === "id" ? "Minta CV melalui email" : "Request CV by email"} href={portfolioData.profile.cv} className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface)] text-[var(--text)]"><Mail size={18} /></a>
+                <a aria-label={locale === "id" ? "Unduh CV (PDF)" : "Download CV (PDF)"} href={portfolioData.profile.cv} download="CV-Prabu-Mahendra.pdf" className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface)] text-[var(--text)]"><FileText size={18} /></a>
               </div>
             </div>
 
